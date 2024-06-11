@@ -58,6 +58,12 @@
         <array>
           <dict>
             <key>name</key>
+            <string>comment.block.documentation.headers.powerbuilder</string>
+            <key>match</key>
+            <string>^(HA)?\$.*$</string>
+          </dict>
+          <dict>
+            <key>name</key>
             <string>meta.variable.declaration.powerbuilder</string>
             <key>match</key>
             <string>^\s*(\w+)\s+(\w+)</string>
@@ -82,29 +88,29 @@
           </dict>
           <dict>
             <key>name</key>
+            <string>meta.member.powerbuilder</string>
+            <key>match</key>
+            <string>(::|\.)(\w*)</string>
+            <key>captures</key>
+            <dict>
+              <key>2</key>
+              <dict>
+                <key>name</key>
+                <string>storage.type.complex.powerbuilder</string>
+              </dict>
+            </dict>
+          </dict>
+          <dict>
+            <key>name</key>
             <string>meta.function.powerbuilder</string>
             <key>match</key>
-            <string>([\w+]*)\s*[(]</string>
+            <string>(\w+)\s*[(]</string>
             <key>captures</key>
             <dict>
               <key>1</key>
               <dict>
                 <key>name</key>
                 <string>entity.name.function.powerbuilder</string>
-              </dict>
-            </dict>
-          </dict>
-          <dict>
-            <key>name</key>
-            <string>meta.member.powerbuilder</string>
-            <key>match</key>
-            <string>(::\|\.)([\w+]*)</string>
-            <key>captures</key>
-            <dict>
-              <key>2</key>
-              <dict>
-                <key>name</key>
-                <string>variable.other.member.powerbuilder</string>
               </dict>
             </dict>
           </dict>
@@ -118,19 +124,19 @@
             <key>name</key>
             <string>constant.numeric.date.powerbuilder</string>
             <key>match</key>
-            <string>\d{4}-\d{2}-\d{2}</string>
+            <string>\b\d{4}-\d{2}-\d{2}\b</string>
           </dict>
           <dict>
             <key>name</key>
             <string>constant.numeric.time.powerbuilder</string>
             <key>match</key>
-            <string>\d{2}:\d{2}:\d{2}(.\d+)?</string>
+            <string>\b\d{2}:\d{2}:\d{2}(.\d+)?\b</string>
           </dict>
           <dict>
             <key>name</key>
             <string>constant.numeric.number.powerbuilder</string>
             <key>match</key>
-            <string>(\d+(\.\d+)?|(\.\d+))([eE][+\-]\d+)?</string>
+            <string>\b(\d+(\.\d+)?|(\.\d+))([eE][+\-]\d+)?\b</string>
           </dict>
           <dict>
             <key>name</key>
