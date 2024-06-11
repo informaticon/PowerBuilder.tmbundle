@@ -1,0 +1,120 @@
+# TODO case insensitiveness
+scopeName: source.powerbuilder
+uuid: EF182D00-2D16-4148-B916-27632C956F35
+fileTypes:
+- sru
+- srd
+- srm
+- srw
+- srs
+- srf
+- sra
+- srp
+- srj
+- srq
+- pbl
+- pbt
+name: PowerBuilder
+patterns:
+  - include: '#strings'
+  - include: '#comments'
+  - include: '#keywords'
+  - include: '#literals'
+  - include: '#special_rules'
+  - include: '#primitives'
+repository:
+  special_rules:
+    patterns:
+      - name: meta.variable.declaration.powerbuilder
+        match: (\w+)\s+(\w+)
+        captures:
+          1:
+            patterns:
+              - include: '#types'
+          2:
+            name: variable.other.local.powerbuilder
+      
+      - name: meta.function.powerbuilder
+        captures:
+						1:
+							name: entity.name.function.powerbuilder
+        match: ([\w+]*)\s*[(]
+
+  literals:
+    patterns:
+      - name: constant.numeric.date.powerbuilder
+        match: \d{4}-\d{2}-\d{2}
+      - name: constant.numeric.time.powerbuilder
+        match: \d{2}:\d{2}:\d{2}(.\d+)?
+      - name: constant.numeric.number.powerbuilder
+        match: (\d+(\.\d+)?|(\.\d+))([eE][+\-]\d+)?
+      - name: constant.language.primitive.powerbuilder
+        match: (?i)\b(true|false|\w+!)\b
+      
+  types:
+    patterns:
+      - include: '#primitives'
+      - name: storage.type.complex.powerbuilder
+        match: \w+
+
+  primitives:
+    patterns:
+      - name: storage.type.primitives.powerbuilder
+        match: (?i)\b(any|blob|boolean|byte|char|character|date|datetime|dec|decimal|double|int|integer|long|longlong|longptr|real|string|time|uint|ulong|unsignedinteger|unsignedlong)\b
+
+  keywords:
+    patterns:
+      - name: keyword.operator.symbols.powerbuilder
+        match: (\+|\-|\*|\/|\^|=|>|<)
+      - name: keyword.operator.boolean.powerbuilder
+        match: (?i)\b(or|and|not)\b
+      - name: keyword.operator.sql.powerbuilder
+        match: (?i)\b(is|close|create|destroy|using|select|delete|insert|describe|update|null|from|into|values|where|commit|connect|disconnect|selectblob|updateblob|execute|declare|prepare|dynamic|fetch|rollback|immediate|descriptor|cursor\s+for|procedure\s+for)\b
+
+
+      - name: storage.modifier.variable.powerbuilder
+        match: (?i)\b(constant|readonly|ref)\b
+
+      - name: storage.modifier.access.powerbuilder
+        match: (?i)\b(public|private|protected|privatewrite|privateread|protectedread|protectedwrite)\b
+
+      - name: variable.language.powerbuiler
+        match: (?i)\b(super|this|sqlca)\b
+
+      - name: storage.modifier.access.powerbuilder
+        match: (?i)\b(window|indirect|variables|end\s+variables|forward|end\s+forward|type|end\s+type|prototypes|within|autoinstantiate|alias|library|system|rpcfunc)\b
+
+      - name: storage.modifier.scope.powerbuilder
+        match: (?i)\b(global|shared|local)\b
+
+      - name: keyword.other.functions.powerbuilder
+        match: (?i)\b(return|function|end\s+function|subroutine|end\s+subroutine|throw|event|end\s+event|on|end\s+on|call|post|trigger|open)\b
+
+      - name: keyword.control.powerbuilder
+        match: (?i)\b(if|then|elseif|case|choose|exit|continue|for|to|step|next|do|while|loop|until|try|catch|finally|release|end|goto|halt)\b
+
+
+  strings:
+    patterns:
+      - name: string.quoted.double.powerbuilder
+        begin: \"
+        end: \"
+        patterns:
+          - name: constant.character.escape.powerbuilder
+            match: ~.
+
+      - name: string.quoted.single.powerbuilder
+        begin: \'
+        end: \'
+        patterns:
+          - name: constant.character.escape.powerbuilder
+            match: ~.
+
+  comments:
+    patterns:
+      - name: comment.line.double-slash.powerbuilder
+        match: //.*$
+      - name: comment.block.documentation.powerbuilder
+        begin: /\*
+        end: \*/
+  
