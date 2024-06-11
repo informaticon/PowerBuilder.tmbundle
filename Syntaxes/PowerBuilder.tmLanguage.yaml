@@ -1,3 +1,4 @@
+---
 # TODO case insensitiveness
 scopeName: source.powerbuilder
 uuid: EF182D00-2D16-4148-B916-27632C956F35
@@ -25,6 +26,9 @@ patterns:
 repository:
   special_rules:
     patterns:
+      - name: comment.block.documentation.headers.powerbuilder
+        match: ^(HA)?\$.*$
+
       - name: meta.variable.declaration.powerbuilder
         match: (\w+)\s+(\w+)
         captures:
@@ -33,21 +37,27 @@ repository:
               - include: '#types'
           2:
             name: variable.other.local.powerbuilder
-      
-      - name: meta.function.powerbuilder
+
+      - name: meta.member.powerbuilder
+        match: (::|\.)(\w+)
         captures:
-						1:
-							name: entity.name.function.powerbuilder
-        match: ([\w+]*)\s*[(]
+            2:
+              name: variable.other.member.powerbuilder
+
+      - name: meta.function.powerbuilder
+        match: (\w+)\s*[(]
+        captures:
+            1:
+              name: entity.name.function.powerbuilder
 
   literals:
     patterns:
       - name: constant.numeric.date.powerbuilder
-        match: \d{4}-\d{2}-\d{2}
+        match: \b\d{4}-\d{2}-\d{2}\b
       - name: constant.numeric.time.powerbuilder
-        match: \d{2}:\d{2}:\d{2}(.\d+)?
+        match: \b\d{2}:\d{2}:\d{2}(.\d+)?\b
       - name: constant.numeric.number.powerbuilder
-        match: (\d+(\.\d+)?|(\.\d+))([eE][+\-]\d+)?
+        match: \b(\d+(\.\d+)?|(\.\d+))([eE][+\-]\d+)?\b
       - name: constant.language.primitive.powerbuilder
         match: (?i)\b(true|false|\w+!)\b
       
@@ -65,7 +75,7 @@ repository:
   keywords:
     patterns:
       - name: keyword.operator.symbols.powerbuilder
-        match: (\+|\-|\*|\/|\^|=|>|<)
+        match: (\+|\-|\*|\/|\^|=|>|<|&)
       - name: keyword.operator.boolean.powerbuilder
         match: (?i)\b(or|and|not)\b
       - name: keyword.operator.sql.powerbuilder
@@ -91,7 +101,7 @@ repository:
         match: (?i)\b(return|function|end\s+function|subroutine|end\s+subroutine|throw|event|end\s+event|on|end\s+on|call|post|trigger|open)\b
 
       - name: keyword.control.powerbuilder
-        match: (?i)\b(if|then|elseif|case|choose|exit|continue|for|to|step|next|do|while|loop|until|try|catch|finally|release|end|goto|halt)\b
+        match: (?i)\b(if|then|else|elseif|case|choose|exit|continue|for|to|step|next|do|while|loop|until|try|catch|finally|release|end|goto|halt)\b
 
 
   strings:
