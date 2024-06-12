@@ -62,7 +62,7 @@ repository:
       - name: constant.language.boolean.powerbuilder
         match: (?i)\b(true|false)\b
       - name: constant.language.enumerated.powerbuilder
-        match: \b(true|false|\w[\w\d$#%\-]*!)\b
+        match: \b\w[\w\d$#%\-]*!
       
   types:
     patterns:

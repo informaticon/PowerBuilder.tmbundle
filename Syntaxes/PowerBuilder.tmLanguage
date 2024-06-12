@@ -181,7 +181,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(true|false|\w[\w\d$#%\-]*!)\b</string>
+					<string>\b\w[\w\d$#%\-]*!</string>
 					<key>name</key>
 					<string>constant.language.enumerated.powerbuilder</string>
 				</dict>
