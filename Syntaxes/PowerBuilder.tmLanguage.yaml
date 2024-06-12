@@ -31,7 +31,7 @@ repository:
         match: ^(HA)?\$.*$
 
       - name: meta.variable.declaration.powerbuilder
-        match: (\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)
+        match: '[^,\(]\s*(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)\s*[$,\)]'
         captures:
           1:
             patterns:
@@ -59,8 +59,10 @@ repository:
         match: \b\d{2}:\d{2}:\d{2}(.\d+)?\b
       - name: constant.numeric.number.powerbuilder
         match: \b(\d+(\.\d+)?|(\.\d+))([eE][+\-]\d+)?\b
-      - name: constant.language.primitive.powerbuilder
-        match: (?i)\b(true|false|\w[\w\d$#%\-]*!)\b
+      - name: constant.language.boolean.powerbuilder
+        match: (?i)\b(true|false)\b
+      - name: constant.language.enumerated.powerbuilder
+        match: \b(true|false|\w[\w\d$#%\-]*!)\b
       
   types:
     patterns:

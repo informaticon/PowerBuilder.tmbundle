@@ -175,9 +175,15 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(true|false|\w[\w\d$#%\-]*!)\b</string>
+					<string>(?i)\b(true|false)\b</string>
 					<key>name</key>
-					<string>constant.language.primitive.powerbuilder</string>
+					<string>constant.language.boolean.powerbuilder</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(true|false|\w[\w\d$#%\-]*!)\b</string>
+					<key>name</key>
+					<string>constant.language.enumerated.powerbuilder</string>
 				</dict>
 			</array>
 		</dict>
@@ -223,7 +229,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)</string>
+					<string>[^,\(]\s*(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)\s*[$,\)]</string>
 					<key>name</key>
 					<string>meta.variable.declaration.powerbuilder</string>
 				</dict>
