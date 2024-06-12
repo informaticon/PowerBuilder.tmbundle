@@ -16,6 +16,7 @@
 		<string>srq</string>
 		<string>pbl</string>
 		<string>pbt</string>
+		<string>pbw</string>
 	</array>
 	<key>name</key>
 	<string>PowerBuilder</string>
@@ -80,13 +81,13 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(or|and|not)\b</string>
+					<string>(?i)\b(or|and|xor|not)\b</string>
 					<key>name</key>
 					<string>keyword.operator.boolean.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(is|close|create|destroy|using|select|delete|insert|describe|update|null|from|into|values|where|commit|connect|disconnect|selectblob|updateblob|execute|declare|prepare|dynamic|fetch|rollback|immediate|descriptor|cursor\s+for|procedure\s+for)\b</string>
+					<string>(?i)\b(is|close|create|destroy|using|select|delete|insert|describe|update|null|from|into|values|where|commit|connect|disconnect|selectblob|updateblob|execute|declare|prepare|dynamic|fetch|first|prior|last|rollback|immediate|descriptor|cursor\s+for|procedure\s+for)\b</string>
 					<key>name</key>
 					<string>keyword.operator.sql.powerbuilder</string>
 				</dict>
@@ -98,13 +99,13 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(public|private|protected|privatewrite|privateread|protectedread|protectedwrite)\b</string>
+					<string>(?i)\b(public|private|protected|privatewrite|privateread|protectedread|protectedwrite|systemread|systemwrite)\b</string>
 					<key>name</key>
 					<string>storage.modifier.access.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(super|this|sqlca)\b</string>
+					<string>(?i)\b(super|this|sqlca|parent)\b</string>
 					<key>name</key>
 					<string>variable.language.powerbuiler</string>
 				</dict>
@@ -122,7 +123,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(return|function|end\s+function|subroutine|end\s+subroutine|throw|event|end\s+event|on|end\s+on|call|post|trigger|open)\b</string>
+					<string>(?i)\b(return|function|end\s+function|subroutine|end\s+subroutine|throw|event|end\s+event|on|end\s+on|call|post|trigger|open|static)\b</string>
 					<key>name</key>
 					<string>keyword.other.functions.powerbuilder</string>
 				</dict>
@@ -131,6 +132,12 @@
 					<string>(?i)\b(if|then|else|elseif|case|choose|exit|continue|for|to|step|next|do|while|loop|until|try|catch|finally|release|end|goto|halt)\b</string>
 					<key>name</key>
 					<string>keyword.control.powerbuilder</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(?i)\b(namespace|intrinsic|with|_debug|enumerated|of|external|native)\b</string>
+					<key>name</key>
+					<string>keyword.other.reserved.powerbuilder</string>
 				</dict>
 			</array>
 		</dict>
