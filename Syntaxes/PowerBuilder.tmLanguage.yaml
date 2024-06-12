@@ -31,7 +31,7 @@ repository:
         match: ^(HA)?\$.*$
 
       - name: meta.variable.declaration.powerbuilder
-        match: '(?<=(^|[;,\(]))\s*(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)\s*(?=$|[;,\)])'
+        match: '(?<=^|[;,\(])\s*(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)\s*(?=$|[;,\)])'
         captures:
           1:
             patterns:

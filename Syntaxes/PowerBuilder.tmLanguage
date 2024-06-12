@@ -229,7 +229,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?&lt;=(^|[;,\(]))\s*(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)\s*(?=$|[;,\)])</string>
+					<string>(?&lt;=^|[;,\(])\s*(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)\s*(?=$|[;,\)])</string>
 					<key>name</key>
 					<string>meta.variable.declaration.powerbuilder</string>
 				</dict>
