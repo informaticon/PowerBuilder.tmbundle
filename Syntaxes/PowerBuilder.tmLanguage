@@ -44,7 +44,7 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#primitives</string>
+			<string>#final</string>
 		</dict>
 	</array>
 	<key>repository</key>
@@ -69,16 +69,26 @@
 				</dict>
 			</array>
 		</dict>
-		<key>keywords</key>
+		<key>final</key>
 		<dict>
 			<key>patterns</key>
 			<array>
+				<dict>
+					<key>include</key>
+					<string>#primitives</string>
+				</dict>
 				<dict>
 					<key>match</key>
 					<string>(\+|\-|\*|\/|\^|=|&gt;|&lt;|&amp;)</string>
 					<key>name</key>
 					<string>keyword.operator.symbols.powerbuilder</string>
 				</dict>
+			</array>
+		</dict>
+		<key>keywords</key>
+		<dict>
+			<key>patterns</key>
+			<array>
 				<dict>
 					<key>match</key>
 					<string>(?i)\b(or|and|xor|not)\b</string>
@@ -165,7 +175,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(true|false|\w+!)\b</string>
+					<string>(?i)\b(true|false|\w[\w\d$#%\-]*!)\b</string>
 					<key>name</key>
 					<string>constant.language.primitive.powerbuilder</string>
 				</dict>
@@ -213,7 +223,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(\w+)\s+(\w+)</string>
+					<string>(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)</string>
 					<key>name</key>
 					<string>meta.variable.declaration.powerbuilder</string>
 				</dict>
@@ -227,7 +237,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(::|\.)(\w+)</string>
+					<string>(::|\.)(\w[\w\d$#%\-]*)</string>
 					<key>name</key>
 					<string>meta.member.powerbuilder</string>
 				</dict>
@@ -241,7 +251,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(\w+)\s*[(]</string>
+					<string>(\w[\w\d$#%\-]*)\s*[(]</string>
 					<key>name</key>
 					<string>meta.function.powerbuilder</string>
 				</dict>
@@ -297,7 +307,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\w+</string>
+					<string>(\w[\w\d$#%\-]*)</string>
 					<key>name</key>
 					<string>storage.type.complex.powerbuilder</string>
 				</dict>

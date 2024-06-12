@@ -23,7 +23,7 @@ patterns:
   - include: '#keywords'
   - include: '#literals'
   - include: '#special_rules'
-  - include: '#primitives'
+  - include: '#final'
 repository:
   special_rules:
     patterns:
@@ -31,7 +31,7 @@ repository:
         match: ^(HA)?\$.*$
 
       - name: meta.variable.declaration.powerbuilder
-        match: (\w+)\s+(\w+)
+        match: (\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)
         captures:
           1:
             patterns:
@@ -40,13 +40,13 @@ repository:
             name: variable.other.local.powerbuilder
 
       - name: meta.member.powerbuilder
-        match: (::|\.)(\w+)
+        match: (::|\.)(\w[\w\d$#%\-]*)
         captures:
             2:
               name: variable.other.member.powerbuilder
 
       - name: meta.function.powerbuilder
-        match: (\w+)\s*[(]
+        match: (\w[\w\d$#%\-]*)\s*[(]
         captures:
             1:
               name: entity.name.function.powerbuilder
@@ -60,23 +60,27 @@ repository:
       - name: constant.numeric.number.powerbuilder
         match: \b(\d+(\.\d+)?|(\.\d+))([eE][+\-]\d+)?\b
       - name: constant.language.primitive.powerbuilder
-        match: (?i)\b(true|false|\w+!)\b
+        match: (?i)\b(true|false|\w[\w\d$#%\-]*!)\b
       
   types:
     patterns:
       - include: '#primitives'
       - name: storage.type.complex.powerbuilder
-        match: \w+
+        match: (\w[\w\d$#%\-]*)
 
   primitives:
     patterns:
       - name: storage.type.primitives.powerbuilder
         match: (?i)\b(any|blob|boolean|byte|char|character|date|datetime|dec|decimal|double|int|integer|long|longlong|longptr|real|string|time|uint|ulong|unsignedinteger|unsignedlong)\b
 
-  keywords:
+  final:
     patterns:
+      - include: '#primitives'
       - name: keyword.operator.symbols.powerbuilder
         match: (\+|\-|\*|\/|\^|=|>|<|&)
+
+  keywords:
+    patterns:
       - name: keyword.operator.boolean.powerbuilder
         match: (?i)\b(or|and|xor|not)\b
       - name: keyword.operator.sql.powerbuilder
