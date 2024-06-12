@@ -91,61 +91,61 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(or|and|xor|not)\b</string>
+					<string>(?i)\s*\b(or|and|xor|not)\b</string>
 					<key>name</key>
 					<string>keyword.operator.boolean.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(is|close|create|destroy|using|select|delete|insert|describe|update|null|from|into|values|where|commit|connect|disconnect|selectblob|updateblob|execute|declare|prepare|dynamic|fetch|first|prior|last|rollback|immediate|descriptor|cursor\s+for|procedure\s+for)\b</string>
+					<string>(?i)\s*\b(is|close|create|destroy|using|select|delete|insert|describe|update|null|from|into|values|where|commit|connect|disconnect|selectblob|updateblob|execute|declare|prepare|dynamic|fetch|first|prior|last|rollback|immediate|descriptor|cursor\s+for|procedure\s+for)\b</string>
 					<key>name</key>
 					<string>keyword.operator.sql.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(constant|readonly|ref)\b</string>
+					<string>(?i)\s*\b(constant|readonly|ref)\b</string>
 					<key>name</key>
 					<string>storage.modifier.variable.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(public|private|protected|privatewrite|privateread|protectedread|protectedwrite|systemread|systemwrite)\b</string>
+					<string>(?i)\s*\b(public|private|protected|privatewrite|privateread|protectedread|protectedwrite|systemread|systemwrite)\b</string>
 					<key>name</key>
 					<string>storage.modifier.access.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(super|this|sqlca|parent)\b</string>
+					<string>(?i)\s*\b(super|this|sqlca|parent)\b</string>
 					<key>name</key>
 					<string>variable.language.powerbuiler</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(window|indirect|variables|end\s+variables|forward|end\s+forward|type|end\s+type|prototypes|within|autoinstantiate|alias|library|system|rpcfunc)\b</string>
+					<string>(?i)\s*\b(window|indirect|variables|end\s+variables|forward|end\s+forward|type|end\s+type|prototypes|within|autoinstantiate|alias|library|system|rpcfunc)\b</string>
 					<key>name</key>
 					<string>storage.modifier.access.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(global|shared|local)\b</string>
+					<string>(?i)\s*\b(global|shared|local)\b</string>
 					<key>name</key>
 					<string>storage.modifier.scope.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(return|function|end\s+function|subroutine|end\s+subroutine|throw|event|end\s+event|on|end\s+on|call|post|trigger|open|static)\b</string>
+					<string>(?i)\s*\b(return|function|end\s+function|subroutine|end\s+subroutine|throw|event|end\s+event|on|end\s+on|call|post|trigger|open|static)\b</string>
 					<key>name</key>
 					<string>keyword.other.functions.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(if|then|else|elseif|case|choose|exit|continue|for|to|step|next|do|while|loop|until|try|catch|finally|release|end|goto|halt)\b</string>
+					<string>(?i)\s*\b(if|then|else|elseif|case|choose|exit|continue|for|to|step|next|do|while|loop|until|try|catch|finally|release|end|goto|halt)\b</string>
 					<key>name</key>
 					<string>keyword.control.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(namespace|intrinsic|with|_debug|enumerated|of|external|native)\b</string>
+					<string>(?i)\s*\b(namespace|intrinsic|with|_debug|enumerated|of|external|native)\b</string>
 					<key>name</key>
 					<string>keyword.other.reserved.powerbuilder</string>
 				</dict>
@@ -175,13 +175,13 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(true|false)\b</string>
+					<string>(?i)\s*\b(true|false)\b</string>
 					<key>name</key>
 					<string>constant.language.boolean.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b\w[\w\d$#%\-]*!</string>
+					<string>\s*\b\w[\w\d$#%\-]*!</string>
 					<key>name</key>
 					<string>constant.language.enumerated.powerbuilder</string>
 				</dict>
@@ -193,7 +193,7 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(any|blob|boolean|byte|char|character|date|datetime|dec|decimal|double|int|integer|long|longlong|longptr|real|string|time|uint|ulong|unsignedinteger|unsignedlong)\b</string>
+					<string>(?i)\s*\b(any|blob|boolean|byte|char|character|date|datetime|dec|decimal|double|int|integer|long|longlong|longptr|real|string|time|uint|ulong|unsignedinteger|unsignedlong)\b</string>
 					<key>name</key>
 					<string>storage.type.primitives.powerbuilder</string>
 				</dict>
@@ -229,7 +229,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>[^,\(]\s*(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)\s*[$,\)]</string>
+					<string>(?&lt;=(^|[;,\(]))\s*(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)\s*(?=$|[;,\)])</string>
 					<key>name</key>
 					<string>meta.variable.declaration.powerbuilder</string>
 				</dict>
