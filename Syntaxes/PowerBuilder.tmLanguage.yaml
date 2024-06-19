@@ -18,6 +18,7 @@ fileTypes:
 - pbw
 name: PowerBuilder
 patterns:
+  - include: '#precompile'
   - include: '#strings'
   - include: '#comments'
   - include: '#keywords'
@@ -112,6 +113,12 @@ repository:
 
       - name: keyword.other.reserved.powerbuilder
         match: (?i)\s*\b(namespace|intrinsic|with|_debug|enumerated|of|external|native)\b
+
+
+  precompile:
+    patterns:
+      - name: name.section.conditional_compilation.powerbuilder
+        match: ^\s*#.*$
 
 
   strings:
