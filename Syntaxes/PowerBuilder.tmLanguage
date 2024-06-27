@@ -156,9 +156,29 @@
 							<key>name</key>
 							<string>storage.type.complex.powerbuilder</string>
 						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.types.powerbuilder</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.complex.powerbuilder</string>
+						</dict>
+						<key>6</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.types.powerbuilder</string>
+						</dict>
+						<key>7</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.complex.powerbuilder</string>
+						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)\b(type|from|within)\s+((?!variables\b)\w[\w\d$#%\-]*)\b</string>
+					<string>(?i)\b(type)\s+(\w[\w\d$#%\-]*)\s+(from)\s+(\w[\w\d$#%\-]*)(\s+(within)\s+(\w[\w\d$#%\-]*))?\b</string>
 					<key>name</key>
 					<string>meta.type.declaration.powerbuilder</string>
 				</dict>

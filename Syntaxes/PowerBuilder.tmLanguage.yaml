@@ -45,11 +45,19 @@ repository:
             name: variable.other.local.powerbuilder
 
       - name: meta.type.declaration.powerbuilder
-        match: (?i)\b(type|from|within)\s+((?!variables\b)\w[\w\d$#%\-]*)\b
+        match: (?i)\b(type)\s+(\w[\w\d$#%\-]*)\s+(from)\s+(\w[\w\d$#%\-]*)(\s+(within)\s+(\w[\w\d$#%\-]*))?\b
         captures:
           1:
             name: keyword.other.types.powerbuilder
           2:
+            name: storage.type.complex.powerbuilder
+          3:
+            name: keyword.other.types.powerbuilder
+          4:
+            name: storage.type.complex.powerbuilder
+          6:
+            name: keyword.other.types.powerbuilder
+          7:
             name: storage.type.complex.powerbuilder
 
       - name: meta.function.throws_clause.powerbuilder
