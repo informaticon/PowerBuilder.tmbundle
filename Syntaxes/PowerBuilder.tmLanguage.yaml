@@ -19,19 +19,56 @@ fileTypes:
 name: PowerBuilder
 patterns:
   - include: '#strings'
+  - include: '#general_rules'
   - include: '#comments'
   - include: '#keywords'
   - include: '#literals'
   - include: '#special_rules'
   - include: '#final'
 repository:
+  general_rules:
+    patterns:
+      - name: meta.variable.create.powerbuilder
+        match: (?i)\b(create)\s+(\w[\w\d$#%\-]*)\b
+        captures:
+          1:
+            name: storage.modifier.access.powerbuilder
+          2:
+            name: storage.type.complex.powerbuilder
+
+      - name: meta.variable.create_using.powerbuilder
+        match: (?i)\b(create)\s+(using)\s+(\w[\w\d$#%\-]*)\b
+        captures:
+          1:
+            name: storage.modifier.access.powerbuilder
+          2:
+            name: storage.modifier.access.powerbuilder
+          3:
+            name: variable.other.local.powerbuilder
+
+      - name: meta.type.declaration.powerbuilder
+        match: (?i)\b(type|from|within)\s+((?!variables\b)\w[\w\d$#%\-]*)\b
+        captures:
+          1:
+            name: storage.modifier.access.powerbuilder
+          2:
+            name: storage.type.complex.powerbuilder
+
+      - name: meta.function.throws_clause.powerbuilder
+        match: (?i)\b(throws)\s+(\w[\w\d$#%\-]*)\b
+        captures:
+          1:
+            name: keyword.other.functions.powerbuilder
+          2:
+            name: storage.type.complex.powerbuilder
+
   special_rules:
     patterns:
       - name: comment.block.documentation.headers.powerbuilder
         match: ^(HA)?\$.*$
 
       - name: meta.variable.declaration.powerbuilder
-        match: '(?<=^|[;,\(])\s*(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)\s*(?=$|[;,\)])'
+        match: \b(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)\b
         captures:
           1:
             patterns:
@@ -39,17 +76,17 @@ repository:
           2:
             name: variable.other.local.powerbuilder
 
-      - name: meta.member.powerbuilder
-        match: (::|\.)(\w[\w\d$#%\-]*)
-        captures:
-            2:
-              name: variable.other.member.powerbuilder
-
       - name: meta.function.powerbuilder
-        match: (\w[\w\d$#%\-]*)\s*[(]
+        match: \b(\w[\w\d$#%\-]*)\s*[(]
         captures:
             1:
               name: entity.name.function.powerbuilder
+
+      - name: meta.member.powerbuilder
+        match: (?<=::|\.)(\w[\w\d$#%\-]*)\b
+        captures:
+            2:
+              name: variable.other.member.powerbuilder
 
   literals:
     patterns:
@@ -60,58 +97,64 @@ repository:
       - name: constant.numeric.number.powerbuilder
         match: \b(\d+(\.\d+)?|(\.\d+))([eE][+\-]\d+)?\b
       - name: constant.language.boolean.powerbuilder
-        match: (?i)\s*\b(true|false)\b
+        match: (?i)\b(true|false)\b
       - name: constant.language.enumerated.powerbuilder
-        match: \s*\b\w[\w\d$#%\-]*!
+        match: \b\w[\w\d$#%\-]*!
       
   types:
     patterns:
       - include: '#primitives'
       - name: storage.type.complex.powerbuilder
-        match: (\w[\w\d$#%\-]*)
+        match: \b(\w[\w\d$#%\-]*)\b
 
   primitives:
     patterns:
       - name: storage.type.primitives.powerbuilder
-        match: (?i)\s*\b(any|blob|boolean|byte|char|character|date|datetime|dec|decimal|double|int|integer|long|longlong|longptr|real|string|time|uint|ulong|unsignedinteger|unsignedlong)\b
+        match: (?i)\b(any|blob|boolean|byte|char|character|date|datetime|dec|decimal|double|int|integer|long|longlong|longptr|real|string|time|uint|ulong|unsignedinteger|unsignedlong)\b
 
   final:
     patterns:
+      # This is in Final so declarations can be found
       - include: '#primitives'
+      # This is in Final because - can appear inside variable names
       - name: keyword.operator.symbols.powerbuilder
         match: (\+|\-|\*|\/|\^|=|>|<|&)
+
+      # Assuming all remaining Words are Variables
+      - name: variable.other.local.powerbuilder
+        match: \b\w[\w\d$#%\-]*\b
 
   keywords:
     patterns:
       - name: keyword.operator.boolean.powerbuilder
-        match: (?i)\s*\b(or|and|xor|not)\b
+        match: (?i)\b(or|and|xor|not)\b
       - name: keyword.operator.sql.powerbuilder
-        match: (?i)\s*\b(is|close|create|destroy|using|select|delete|insert|describe|update|null|from|into|values|where|commit|connect|disconnect|selectblob|updateblob|execute|declare|prepare|dynamic|fetch|first|prior|last|rollback|immediate|descriptor|cursor\s+for|procedure\s+for)\b
+        match: (?i)\b(is|close|using|select|delete|insert|describe|update|null|from|into|values|where|commit|connect|disconnect|selectblob|updateblob|execute|declare|prepare|fetch|first|prior|last|rollback|immediate|descriptor|cursor\s+for|procedure\s+for)\b
 
 
       - name: storage.modifier.variable.powerbuilder
-        match: (?i)\s*\b(constant|readonly|ref)\b
+        match: (?i)\b(constant|readonly|ref)\b
 
       - name: storage.modifier.access.powerbuilder
-        match: (?i)\s*\b(public|private|protected|privatewrite|privateread|protectedread|protectedwrite|systemread|systemwrite)\b
+        match: (?i)\b(public|private|protected|privatewrite|privateread|protectedread|protectedwrite|systemread|systemwrite)\b
 
       - name: variable.language.powerbuiler
-        match: (?i)\s*\b(super|this|sqlca|parent)\b
+        match: (?i)\b(super|this|sqlca|parent)\b
 
       - name: storage.modifier.access.powerbuilder
-        match: (?i)\s*\b(window|indirect|variables|end\s+variables|forward|end\s+forward|type|end\s+type|prototypes|within|autoinstantiate|alias|library|system|rpcfunc)\b
+        match: (?i)\b(window|indirect|variables|end\s+variables|forward|end\s+forward|destroy|create|type|end\s+type|prototypes|within|autoinstantiate|alias\s+for|alias|library|system|rpcfunc)\b
 
       - name: storage.modifier.scope.powerbuilder
-        match: (?i)\s*\b(global|shared|local)\b
+        match: (?i)\b(global|shared|local)\b
 
       - name: keyword.other.functions.powerbuilder
-        match: (?i)\s*\b(return|function|end\s+function|subroutine|end\s+subroutine|throw|event|end\s+event|on|end\s+on|call|post|trigger|open|static)\b
+        match: (?i)\b(return|function|end\s+function|subroutine|end\s+subroutine|throw|throws|event|end\s+event|on|end\s+on|call|dynamic|post|trigger|open|static)\b
 
       - name: keyword.control.powerbuilder
-        match: (?i)\s*\b(if|then|else|elseif|case|choose|exit|continue|for|to|step|next|do|while|loop|until|try|catch|finally|release|end|goto|halt)\b
+        match: (?i)\b(if|then|else|elseif|case|choose|exit|continue|for|to|step|next|do|while|loop|until|try|catch|finally|release|end|goto|halt)\b
 
       - name: keyword.other.reserved.powerbuilder
-        match: (?i)\s*\b(namespace|intrinsic|with|_debug|enumerated|of|external|native)\b
+        match: (?i)\b(namespace|intrinsic|with|_debug|enumerated|of|external|native)\b
 
 
   strings:
@@ -120,15 +163,24 @@ repository:
         begin: \"
         end: \"
         patterns:
-          - name: constant.character.escape.powerbuilder
-            match: ~.
+          - include: '#string-escapes'
 
       - name: string.quoted.single.powerbuilder
         begin: \'
         end: \'
         patterns:
-          - name: constant.character.escape.powerbuilder
-            match: ~.
+          - include: '#string-escapes'
+
+  string-escapes:
+    patterns:
+      - name: constant.character.escape.powerbuilder
+        match: ~o?\d{3}
+
+      - name: constant.character.escape.powerbuilder
+        match: ~h[0-9a-fA-F]{2}
+
+      - name: constant.character.escape.powerbuilder
+        match: ~.
 
   comments:
     patterns:
