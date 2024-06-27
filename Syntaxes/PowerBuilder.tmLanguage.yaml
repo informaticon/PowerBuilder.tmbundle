@@ -30,7 +30,7 @@ repository:
   general_rules:
     patterns:
       - name: meta.sql.statement.powerbuilder
-        begin: (?i)^\s*(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)\b
+        begin: (?i)^\s*(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)\b(?!\s*\()
         end: ;
         captures:
           1:
@@ -104,7 +104,7 @@ repository:
             name: entity.name.function.powerbuilder
 
       - name: meta.variable.declaration.powerbuilder
-        match: \b(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)\b
+        match: (?i)\b(\w[\w\d$#%\-]*)\s+(?!or|and|then)(\w[\w\d$#%\-]*)\b
         captures:
           1:
             patterns:

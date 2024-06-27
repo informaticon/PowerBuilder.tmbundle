@@ -111,7 +111,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?i)^\s*(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)\b</string>
+					<string>(?i)^\s*(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)\b(?!\s*\()</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -414,7 +414,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>\b(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)\b</string>
+					<string>(?i)\b(\w[\w\d$#%\-]*)\s+(?!or|and|then)(\w[\w\d$#%\-]*)\b</string>
 					<key>name</key>
 					<string>meta.variable.declaration.powerbuilder</string>
 				</dict>
