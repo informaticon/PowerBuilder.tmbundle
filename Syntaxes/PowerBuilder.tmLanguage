@@ -71,6 +71,12 @@
 					<key>name</key>
 					<string>comment.block.documentation.powerbuilder</string>
 				</dict>
+				<dict>
+					<key>match</key>
+					<string>^(HA)?\$.*$</string>
+					<key>name</key>
+					<string>comment.block.documentation.headers.powerbuilder</string>
+				</dict>
 			</array>
 		</dict>
 		<key>final</key>
@@ -301,36 +307,6 @@
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>match</key>
-					<string>^(HA)?\$.*$</string>
-					<key>name</key>
-					<string>comment.block.documentation.headers.powerbuilder</string>
-				</dict>
-				<dict>
-					<key>captures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>patterns</key>
-							<array>
-								<dict>
-									<key>include</key>
-									<string>#types</string>
-								</dict>
-							</array>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>variable.other.local.powerbuilder</string>
-						</dict>
-					</dict>
-					<key>match</key>
-					<string>\b(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)\b</string>
-					<key>name</key>
-					<string>meta.variable.declaration.powerbuilder</string>
-				</dict>
-				<dict>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -357,6 +333,30 @@
 					<string>(?&lt;=::|\.)(\w[\w\d$#%\-]*)\b</string>
 					<key>name</key>
 					<string>meta.member.powerbuilder</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#types</string>
+								</dict>
+							</array>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>variable.other.local.powerbuilder</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>\b(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)\b</string>
+					<key>name</key>
+					<string>meta.variable.declaration.powerbuilder</string>
 				</dict>
 			</array>
 		</dict>

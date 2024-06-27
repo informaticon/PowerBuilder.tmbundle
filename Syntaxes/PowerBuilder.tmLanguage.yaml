@@ -18,7 +18,6 @@ fileTypes:
 - pbw
 name: PowerBuilder
 patterns:
-  - include: '#precompile'
   - include: '#strings'
   - include: '#general_rules'
   - include: '#comments'
@@ -65,18 +64,6 @@ repository:
 
   special_rules:
     patterns:
-      - name: comment.block.documentation.headers.powerbuilder
-        match: ^(HA)?\$.*$
-
-      - name: meta.variable.declaration.powerbuilder
-        match: \b(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)\b
-        captures:
-          1:
-            patterns:
-              - include: '#types'
-          2:
-            name: variable.other.local.powerbuilder
-
       - name: meta.function.powerbuilder
         match: \b(\w[\w\d$#%\-]*)\s*[(]
         captures:
@@ -88,6 +75,15 @@ repository:
         captures:
             2:
               name: variable.other.member.powerbuilder
+
+      - name: meta.variable.declaration.powerbuilder
+        match: \b(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)\b
+        captures:
+          1:
+            patterns:
+              - include: '#types'
+          2:
+            name: variable.other.local.powerbuilder
 
   literals:
     patterns:
@@ -158,12 +154,6 @@ repository:
         match: (?i)\b(namespace|intrinsic|with|_debug|enumerated|of|external|native)\b
 
 
-  precompile:
-    patterns:
-      - name: name.section.conditional_compilation.powerbuilder
-        match: ^\s*#.*$
-
-
   strings:
     patterns:
       - name: string.quoted.double.powerbuilder
@@ -193,7 +183,12 @@ repository:
     patterns:
       - name: comment.line.double-slash.powerbuilder
         match: //.*$
+
       - name: comment.block.documentation.powerbuilder
         begin: /\*
         end: \*/
+
+      - name: comment.block.documentation.headers.powerbuilder
+        match: ^(HA)?\$.*$
+
   
