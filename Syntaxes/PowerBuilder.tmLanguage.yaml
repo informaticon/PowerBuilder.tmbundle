@@ -62,8 +62,8 @@ repository:
 
   special_rules:
     patterns:
-      - name: meta.function.powerbuilder
-        match: \b(\w[\w\d$#%\-]*)\s*[(]
+      - name: meta.function.call.powerbuilder
+        match: \b(\w[\w\d$#%\-]*)(?=\s*\()
         captures:
             1:
               name: entity.name.function.powerbuilder
@@ -73,6 +73,16 @@ repository:
         captures:
             2:
               name: variable.other.member.powerbuilder
+
+
+      - name: meta.function.declaration.powerbuilder
+        match: \b(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)(?=\s*\()
+        captures:
+          1:
+            patterns:
+              - include: '#types'
+          2:
+            name: entity.name.function.powerbuilder
 
       - name: meta.variable.declaration.powerbuilder
         match: \b(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)\b
@@ -127,10 +137,10 @@ repository:
         match: (?i)\b(is|close|using|select|delete|insert|describe|update|null|from|into|values|where|commit|connect|disconnect|selectblob|updateblob|execute|declare|prepare|fetch|first|prior|last|rollback|immediate|descriptor|cursor\s+for|procedure\s+for)\b
 
 
-      - name: storage.modifier.variable.powerbuilder
+      - name: keyword.other.variable.modifier.powerbuilder
         match: (?i)\b(constant|readonly|ref)\b
 
-      - name: storage.modifier.access.powerbuilder
+      - name: keyword.other.access.powerbuilder
         match: (?i)\b(public|private|protected|privatewrite|privateread|protectedread|protectedwrite|systemread|systemwrite)\b
 
       - name: variable.language.powerbuiler

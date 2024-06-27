@@ -203,13 +203,13 @@
 					<key>match</key>
 					<string>(?i)\b(constant|readonly|ref)\b</string>
 					<key>name</key>
-					<string>storage.modifier.variable.powerbuilder</string>
+					<string>keyword.other.variable.modifier.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>(?i)\b(public|private|protected|privatewrite|privateread|protectedread|protectedwrite|systemread|systemwrite)\b</string>
 					<key>name</key>
-					<string>storage.modifier.access.powerbuilder</string>
+					<string>keyword.other.access.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
@@ -311,9 +311,9 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>\b(\w[\w\d$#%\-]*)\s*[(]</string>
+					<string>\b(\w[\w\d$#%\-]*)(?=\s*\()</string>
 					<key>name</key>
-					<string>meta.function.powerbuilder</string>
+					<string>meta.function.call.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>captures</key>
@@ -328,6 +328,30 @@
 					<string>(?&lt;=::|\.)(\w[\w\d$#%\-]*)\b</string>
 					<key>name</key>
 					<string>meta.member.powerbuilder</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#types</string>
+								</dict>
+							</array>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.powerbuilder</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>\b(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)(?=\s*\()</string>
+					<key>name</key>
+					<string>meta.function.declaration.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>captures</key>
