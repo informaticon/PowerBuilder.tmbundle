@@ -22,12 +22,30 @@ patterns:
   - include: '#general_rules'
   - include: '#comments'
   - include: '#keywords'
+  - include: '#sql_keywords'
   - include: '#literals'
   - include: '#special_rules'
   - include: '#final'
 repository:
   general_rules:
     patterns:
+      - name: meta.sql.statement.powerbuilder
+        begin: (?i)^\s*(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)\b
+        end: ;
+        captures:
+          1:
+            name: keyword.operator.sql.powerbuilder
+        patterns:
+          - include: '#sql_keywords'
+          - include: '#literals'
+
+          - name: variable.other.local.powerbuilder
+            match: (?<=::|\.)\w[\w\d$#%\-]*\b
+
+          - name: variable.other.local.powerbuilder
+            match: \b:?(\w[\w\d$#%\-]*)\b
+
+
       - name: meta.variable.create.powerbuilder
         match: (?i)\b(create)\s+(\w[\w\d$#%\-]*)\b
         captures:
@@ -70,18 +88,11 @@ repository:
 
   special_rules:
     patterns:
-      - name: meta.function.call.powerbuilder
-        match: \b(\w[\w\d$#%\-]*)(?=\s*\()
-        captures:
-            1:
-              name: entity.name.function.powerbuilder
+      - name: entity.name.function.powerbuilder
+        match: \b\w[\w\d$#%\-]*(?=\s*\()
 
-      - name: meta.member.powerbuilder
-        match: (?<=::|\.)(\w[\w\d$#%\-]*)\b
-        captures:
-            2:
-              name: variable.other.member.powerbuilder
-
+      - name: variable.other.member.powerbuilder
+        match: (?<=::|\.)\w[\w\d$#%\-]*\b
 
       - name: meta.function.declaration.powerbuilder
         match: \b(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)(?=\s*\()
@@ -140,10 +151,7 @@ repository:
   keywords:
     patterns:
       - name: keyword.operator.boolean.powerbuilder
-        match: (?i)\b(or|and|xor|not)\b
-      - name: keyword.operator.sql.powerbuilder
-        match: (?i)\b(is|close|using|select|delete|insert|describe|update|null|from|into|values|where|commit|connect|disconnect|selectblob|updateblob|execute|declare|prepare|fetch|first|prior|last|rollback|immediate|descriptor|cursor\s+for|procedure\s+for)\b
-
+        match: (?i)\b(or|and|not)\b
 
       - name: keyword.other.variable.modifier.powerbuilder
         match: (?i)\b(constant|readonly|ref)\b
@@ -167,8 +175,18 @@ repository:
         match: (?i)\b(if|then|else|elseif|case|choose|exit|continue|for|to|step|next|do|while|loop|until|try|catch|finally|release|end|goto|halt)\b
 
       - name: keyword.other.reserved.powerbuilder
-        match: (?i)\b(namespace|intrinsic|with|_debug|enumerated|of|external|native)\b
+        match: (?i)\b(namespace|intrinsic|with|_debug|enumerated|external|native)\b
 
+  sql_keywords:
+    patterns:
+      - name: keyword.operator.sql.boolean.powerbuilder
+        match: (?i)\b(or|and|xor|not)\b
+
+      - name: keyword.operator.sql.powerbuilder
+        match: (?i)^\s*(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)\b
+
+      - name: keyword.operator.sql.powerbuilder
+        match: (?i)\b(set|current|of|is|using|null|from|into|values|where|first|prior|last|rollback|immediate|descriptor|cursor|procedure|for|of)\b
 
   strings:
     patterns:
