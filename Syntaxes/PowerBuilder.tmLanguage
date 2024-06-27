@@ -111,7 +111,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>storage.modifier.access.powerbuilder</string>
+							<string>keyword.other.types.powerbuilder</string>
 						</dict>
 						<key>2</key>
 						<dict>
@@ -130,21 +130,16 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>storage.modifier.access.powerbuilder</string>
+							<string>keyword.other.types.powerbuilder</string>
 						</dict>
 						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>storage.modifier.access.powerbuilder</string>
-						</dict>
-						<key>3</key>
 						<dict>
 							<key>name</key>
 							<string>variable.other.local.powerbuilder</string>
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)\b(create)\s+(using)\s+(\w[\w\d$#%\-]*)\b</string>
+					<string>(?i)\b(create\s+using)\s+(\w[\w\d$#%\-]*)\b</string>
 					<key>name</key>
 					<string>meta.variable.create_using.powerbuilder</string>
 				</dict>
@@ -154,7 +149,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>storage.modifier.access.powerbuilder</string>
+							<string>keyword.other.types.powerbuilder</string>
 						</dict>
 						<key>2</key>
 						<dict>
@@ -224,19 +219,19 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(window|indirect|variables|end\s+variables|forward|end\s+forward|destroy|create|type|end\s+type|prototypes|within|autoinstantiate|alias\s+for|alias|library|system|rpcfunc)\b</string>
+					<string>(?i)\b(window|indirect|variables|end\s+variables|forward|end\s+forward|destroy|create|type|end\s+type|prototypes|within|autoinstantiate|system)\b</string>
 					<key>name</key>
-					<string>storage.modifier.access.powerbuilder</string>
+					<string>keyword.other.types.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>(?i)\b(global|shared|local)\b</string>
 					<key>name</key>
-					<string>storage.modifier.scope.powerbuilder</string>
+					<string>keyword.other.scope.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(return|function|end\s+function|subroutine|end\s+subroutine|throw|throws|event|end\s+event|on|end\s+on|call|dynamic|post|trigger|open|static)\b</string>
+					<string>(?i)\b(return|function|end\s+function|subroutine|end\s+subroutine|throw|throws|event|end\s+event|on|end\s+on|call|dynamic|post|trigger|open|static|alias\s+for|alias|library|rpcfunc)\b</string>
 					<key>name</key>
 					<string>keyword.other.functions.powerbuilder</string>
 				</dict>

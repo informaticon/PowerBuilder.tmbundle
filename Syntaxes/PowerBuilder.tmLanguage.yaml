@@ -32,25 +32,23 @@ repository:
         match: (?i)\b(create)\s+(\w[\w\d$#%\-]*)\b
         captures:
           1:
-            name: storage.modifier.access.powerbuilder
+            name: keyword.other.types.powerbuilder
           2:
             name: storage.type.complex.powerbuilder
 
       - name: meta.variable.create_using.powerbuilder
-        match: (?i)\b(create)\s+(using)\s+(\w[\w\d$#%\-]*)\b
+        match: (?i)\b(create\s+using)\s+(\w[\w\d$#%\-]*)\b
         captures:
           1:
-            name: storage.modifier.access.powerbuilder
+            name: keyword.other.types.powerbuilder
           2:
-            name: storage.modifier.access.powerbuilder
-          3:
             name: variable.other.local.powerbuilder
 
       - name: meta.type.declaration.powerbuilder
         match: (?i)\b(type|from|within)\s+((?!variables\b)\w[\w\d$#%\-]*)\b
         captures:
           1:
-            name: storage.modifier.access.powerbuilder
+            name: keyword.other.types.powerbuilder
           2:
             name: storage.type.complex.powerbuilder
 
@@ -138,14 +136,14 @@ repository:
       - name: variable.language.powerbuiler
         match: (?i)\b(super|this|sqlca|parent)\b
 
-      - name: storage.modifier.access.powerbuilder
-        match: (?i)\b(window|indirect|variables|end\s+variables|forward|end\s+forward|destroy|create|type|end\s+type|prototypes|within|autoinstantiate|alias\s+for|alias|library|system|rpcfunc)\b
+      - name: keyword.other.types.powerbuilder
+        match: (?i)\b(window|indirect|variables|end\s+variables|forward|end\s+forward|destroy|create|type|end\s+type|prototypes|within|autoinstantiate|system)\b
 
-      - name: storage.modifier.scope.powerbuilder
+      - name: keyword.other.scope.powerbuilder
         match: (?i)\b(global|shared|local)\b
 
       - name: keyword.other.functions.powerbuilder
-        match: (?i)\b(return|function|end\s+function|subroutine|end\s+subroutine|throw|throws|event|end\s+event|on|end\s+on|call|dynamic|post|trigger|open|static)\b
+        match: (?i)\b(return|function|end\s+function|subroutine|end\s+subroutine|throw|throws|event|end\s+event|on|end\s+on|call|dynamic|post|trigger|open|static|alias\s+for|alias|library|rpcfunc)\b
 
       - name: keyword.control.powerbuilder
         match: (?i)\b(if|then|else|elseif|case|choose|exit|continue|for|to|step|next|do|while|loop|until|try|catch|finally|release|end|goto|halt)\b
