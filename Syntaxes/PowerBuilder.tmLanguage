@@ -276,7 +276,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(window|indirect|variables|end\s+variables|forward|end\s+forward|destroy|create|type|end\s+type|prototypes|within|autoinstantiate|system)\b</string>
+					<string>(?i)\b(indirect|variables|end\s+variables|forward|end\s+forward|destroy|create|type|end\s+type|prototypes|within|autoinstantiate|system)\b</string>
 					<key>name</key>
 					<string>keyword.other.types.powerbuilder</string>
 				</dict>
