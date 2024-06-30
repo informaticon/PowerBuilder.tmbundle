@@ -47,7 +47,7 @@ repository:
 
 
       - name: meta.variable.create.powerbuilder
-        match: (?i)\b(create)\s+(\w[\w\d$#%\-]*)\b
+        match: (?i)\b(create)\s+(\w[\w\d$#%\-`]*)\b
         captures:
           1:
             name: keyword.other.types.powerbuilder
@@ -55,7 +55,7 @@ repository:
             name: storage.type.complex.powerbuilder
 
       - name: meta.variable.create_using.powerbuilder
-        match: (?i)\b(create\s+using)\s+(\w[\w\d$#%\-]*)\b
+        match: (?i)\b(create\s+using)(\s+\w[\w\d$#%\-]*)?\b
         captures:
           1:
             name: keyword.other.types.powerbuilder
@@ -63,7 +63,7 @@ repository:
             name: variable.other.local.powerbuilder
 
       - name: meta.type.declaration.powerbuilder
-        match: (?i)\b(type)\s+(\w[\w\d$#%\-]*)\s+(from)\s+(\w[\w\d$#%\-]*)(\s+(within)\s+(\w[\w\d$#%\-]*))?\b
+        match: (?i)\b(type)\s+(\w[\w\d$#%\-]*)\s+(from)\s+(\w[\w\d$#%\-`]*)(\s+(within)\s+(\w[\w\d$#%\-`]*))?\b
         captures:
           1:
             name: keyword.other.types.powerbuilder
@@ -79,7 +79,7 @@ repository:
             name: storage.type.complex.powerbuilder
 
       - name: meta.function.throws_clause.powerbuilder
-        match: (?i)\b(throws)\s+(\w[\w\d$#%\-]*)\b
+        match: (?i)\b(throws)\s+(\w[\w\d$#%\-`]*)\b
         captures:
           1:
             name: keyword.other.functions.powerbuilder
@@ -104,7 +104,7 @@ repository:
             name: entity.name.function.powerbuilder
 
       - name: meta.variable.declaration.powerbuilder
-        match: (?i)\b(\w[\w\d$#%\-]*)\s+(?!or|and|then)(\w[\w\d$#%\-]*)\b
+        match: (?i)\b(\w[\w\d$#%\-`]*)\s+(?!or|and|then)(\w[\w\d$#%\-]*)\b
         captures:
           1:
             patterns:
@@ -129,7 +129,7 @@ repository:
     patterns:
       - include: '#primitives'
       - name: storage.type.complex.powerbuilder
-        match: \b(\w[\w\d$#%\-]*)\b
+        match: \b(\w[\w\d$#%\-`]*)\b
 
   primitives:
     patterns:
