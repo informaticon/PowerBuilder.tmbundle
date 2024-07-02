@@ -88,20 +88,16 @@
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>include</key>
-					<string>#primitives</string>
+					<key>match</key>
+					<string>\b\w[\w\d$#%\-]*\b</string>
+					<key>name</key>
+					<string>variable.other.local.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>(\+|\-|\*|\/|\^|=|&gt;|&lt;|&amp;)</string>
 					<key>name</key>
 					<string>keyword.operator.symbols.powerbuilder</string>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>\b\w[\w\d$#%\-]*\b</string>
-					<key>name</key>
-					<string>variable.other.local.powerbuilder</string>
 				</dict>
 			</array>
 		</dict>
@@ -243,6 +239,45 @@
 					<string>(?i)\b(throws)\s+(\w[\w\d$#%\-`]*)\b</string>
 					<key>name</key>
 					<string>meta.function.throws_clause.powerbuilder</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.functions.powerbuilder</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.types.powerbuilder</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#types</string>
+								</dict>
+							</array>
+						</dict>
+						<key>5</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.event.powerbuilder</string>
+						</dict>
+						<key>7</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.tag.event.powerbuilder</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(?i)\b(event)(\s+(type)\s+(\w[\w\d$#%\-`]*))?\s+(\w[\w\d$#%\-]*)(\s+(\w[\w\d$#%\-]*))?</string>
+					<key>name</key>
+					<string>meta.event.declaration_definition.powerbuilder</string>
 				</dict>
 			</array>
 		</dict>
