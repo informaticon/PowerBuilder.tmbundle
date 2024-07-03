@@ -40,14 +40,14 @@ repository:
           - include: '#literals'
 
           - name: variable.other.local.powerbuilder
-            match: (?<=::|\.)\w[\w\d$#%\-]*\b
+            match: (?<=::|\.)[\w\d$#%\-]+
 
           - name: variable.other.local.powerbuilder
-            match: \b:?(\w[\w\d$#%\-]*)\b
+            match: :?([\w\d$#%\-]+)
 
 
       - name: meta.variable.create.powerbuilder
-        match: (?i)\b(create)\s+(\w[\w\d$#%\-`]*)\b
+        match: (?i)\b(create)\s+([\w\d$#%\-`]+)
         captures:
           1:
             name: keyword.other.types.powerbuilder
@@ -55,7 +55,7 @@ repository:
             name: storage.type.complex.powerbuilder
 
       - name: meta.variable.create_using.powerbuilder
-        match: (?i)\b(create\s+using)(\s+\w[\w\d$#%\-]*)?\b
+        match: (?i)\b(create\s+using)(\s+[\w\d$#%\-]+)?
         captures:
           1:
             name: keyword.other.types.powerbuilder
@@ -63,7 +63,7 @@ repository:
             name: variable.other.local.powerbuilder
 
       - name: meta.type.declaration.powerbuilder
-        match: (?i)\b(type)\s+(\w[\w\d$#%\-]*)\s+(from)\s+(\w[\w\d$#%\-`]*)(\s+(within)\s+(\w[\w\d$#%\-`]*))?\b
+        match: (?i)\b(type)\s+([\w\d$#%\-]+)\s+(from)\s+([\w\d$#%\-`]+)(\s+(within)\s+([\w\d$#%\-`]+))?
         captures:
           1:
             name: keyword.other.types.powerbuilder
@@ -79,7 +79,7 @@ repository:
             name: storage.type.complex.powerbuilder
 
       - name: meta.function.throws_clause.powerbuilder
-        match: (?i)\b(throws)\s+(\w[\w\d$#%\-`]*)\b
+        match: (?i)\b(throws)\s+([\w\d$#%\-`]+)
         captures:
           1:
             name: keyword.other.functions.powerbuilder
@@ -88,7 +88,7 @@ repository:
 
       # - name: constant.numeric.time.powerbuilder
       - name: meta.event.declaration_definition.powerbuilder
-        match: (?i)\b(event)(\s+(type)\s+(\w[\w\d$#%\-`]*))?\s+(\w[\w\d$#%\-]*)(\s+(\w[\w\d$#%\-]*))?
+        match: (?i)\b(event)(\s+(type)\s+([\w\d$#%\-`]+))?\s+([\w\d$#%\-]+)(\s+([\w\d$#%\-]+))?
         captures:
           1:
             name: keyword.other.functions.powerbuilder
@@ -105,13 +105,13 @@ repository:
   special_rules:
     patterns:
       - name: entity.name.function.powerbuilder
-        match: \b\w[\w\d$#%\-]*(?=\s*\()
+        match: '[\w\d$#%\-]+(?=\s*\()'
 
       - name: variable.other.member.powerbuilder
-        match: (?<=::|\.)\w[\w\d$#%\-]*\b
+        match: (?<=::|\.)[\w\d$#%\-]+
 
       - name: meta.function.declaration.powerbuilder
-        match: \b(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)(?=\s*\()
+        match: ([\w\d$#%\-]+)\s+([\w\d$#%\-]+)(?=\s*\()
         captures:
           1:
             patterns:
@@ -120,7 +120,7 @@ repository:
             name: entity.name.function.powerbuilder
 
       - name: meta.variable.declaration.powerbuilder
-        match: (?i)\b(\w[\w\d$#%\-`]*)\s+(?!or|and|then)(\w[\w\d$#%\-]*)\b
+        match: (?i)([\w\d$#%\-`]+)\s+(?!or|and|then)([\w\d$#%\-]+)
         captures:
           1:
             patterns:
@@ -139,13 +139,13 @@ repository:
       - name: constant.language.boolean.powerbuilder
         match: (?i)\b(true|false)\b
       - name: constant.language.enumerated.powerbuilder
-        match: \b\w[\w\d$#%\-]*!
+        match: '[\w\d$#%\-]+!'
       
   types:
     patterns:
       - include: '#primitives'
       - name: storage.type.complex.powerbuilder
-        match: \b(\w[\w\d$#%\-`]*)\b
+        match: ([\w\d$#%\-`]+)
 
   primitives:
     patterns:
@@ -154,12 +154,12 @@ repository:
 
   final:
     patterns:
-      # We don't match for primitives, because variables can named the same
+      # We don't match for primitives anymore, because variables can have the same name as types
       # - include: '#primitives'
 
       # Assuming all remaining Words are Variables
       - name: variable.other.local.powerbuilder
-        match: \b\w[\w\d$#%\-]*\b
+        match: '[\w\d$#%\-]+'
 
       - name: keyword.operator.symbols.powerbuilder
         match: (\+|\-|\*|\/|\^|=|>|<|&)
@@ -238,7 +238,23 @@ repository:
         begin: /\*
         end: \*/
 
-      - name: comment.block.documentation.headers.powerbuilder
-        match: ^(HA)?\$.*$
+      - name: meta.header.powerbuilder
+        begin: \A(HA)?
+        end: ^(?!\$)
+        captures:
+          1:
+            name: comment.block.documentation.headers.powerbuilder
+        patterns:
+          - name: meta.header.line.powerbuilder
+            match: (\$)(.*?)(\$)(.*)
+            captures:
+              1:
+                name: comment.block.documentation.headers.powerbuilder
+              2:
+                name: variable.other.header.name.powerbuilder
+              3:
+                name: comment.block.documentation.headers.powerbuilder
+              4:
+                name: string.unquoted.header.description.powerbuilder
 
   

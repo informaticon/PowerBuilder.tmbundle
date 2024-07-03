@@ -76,10 +76,52 @@
 					<string>comment.block.documentation.powerbuilder</string>
 				</dict>
 				<dict>
-					<key>match</key>
-					<string>^(HA)?\$.*$</string>
+					<key>begin</key>
+					<string>\A(HA)?</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>comment.block.documentation.headers.powerbuilder</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>^(?!\$)</string>
 					<key>name</key>
-					<string>comment.block.documentation.headers.powerbuilder</string>
+					<string>meta.header.powerbuilder</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>captures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>name</key>
+									<string>comment.block.documentation.headers.powerbuilder</string>
+								</dict>
+								<key>2</key>
+								<dict>
+									<key>name</key>
+									<string>variable.other.header.name.powerbuilder</string>
+								</dict>
+								<key>3</key>
+								<dict>
+									<key>name</key>
+									<string>comment.block.documentation.headers.powerbuilder</string>
+								</dict>
+								<key>4</key>
+								<dict>
+									<key>name</key>
+									<string>string.unquoted.header.description.powerbuilder</string>
+								</dict>
+							</dict>
+							<key>match</key>
+							<string>(\$)(.*?)(\$)(.*)</string>
+							<key>name</key>
+							<string>meta.header.line.powerbuilder</string>
+						</dict>
+					</array>
 				</dict>
 			</array>
 		</dict>
@@ -89,7 +131,7 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>\b\w[\w\d$#%\-]*\b</string>
+					<string>[\w\d$#%\-]+</string>
 					<key>name</key>
 					<string>variable.other.local.powerbuilder</string>
 				</dict>
@@ -132,13 +174,13 @@
 						</dict>
 						<dict>
 							<key>match</key>
-							<string>(?&lt;=::|\.)\w[\w\d$#%\-]*\b</string>
+							<string>(?&lt;=::|\.)[\w\d$#%\-]+</string>
 							<key>name</key>
 							<string>variable.other.local.powerbuilder</string>
 						</dict>
 						<dict>
 							<key>match</key>
-							<string>\b:?(\w[\w\d$#%\-]*)\b</string>
+							<string>:?([\w\d$#%\-]+)</string>
 							<key>name</key>
 							<string>variable.other.local.powerbuilder</string>
 						</dict>
@@ -159,7 +201,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)\b(create)\s+(\w[\w\d$#%\-`]*)\b</string>
+					<string>(?i)\b(create)\s+([\w\d$#%\-`]+)</string>
 					<key>name</key>
 					<string>meta.variable.create.powerbuilder</string>
 				</dict>
@@ -178,7 +220,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)\b(create\s+using)(\s+\w[\w\d$#%\-]*)?\b</string>
+					<string>(?i)\b(create\s+using)(\s+[\w\d$#%\-]+)?</string>
 					<key>name</key>
 					<string>meta.variable.create_using.powerbuilder</string>
 				</dict>
@@ -217,7 +259,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)\b(type)\s+(\w[\w\d$#%\-]*)\s+(from)\s+(\w[\w\d$#%\-`]*)(\s+(within)\s+(\w[\w\d$#%\-`]*))?\b</string>
+					<string>(?i)\b(type)\s+([\w\d$#%\-]+)\s+(from)\s+([\w\d$#%\-`]+)(\s+(within)\s+([\w\d$#%\-`]+))?</string>
 					<key>name</key>
 					<string>meta.type.declaration.powerbuilder</string>
 				</dict>
@@ -236,7 +278,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)\b(throws)\s+(\w[\w\d$#%\-`]*)\b</string>
+					<string>(?i)\b(throws)\s+([\w\d$#%\-`]+)</string>
 					<key>name</key>
 					<string>meta.function.throws_clause.powerbuilder</string>
 				</dict>
@@ -275,7 +317,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)\b(event)(\s+(type)\s+(\w[\w\d$#%\-`]*))?\s+(\w[\w\d$#%\-]*)(\s+(\w[\w\d$#%\-]*))?</string>
+					<string>(?i)\b(event)(\s+(type)\s+([\w\d$#%\-`]+))?\s+([\w\d$#%\-]+)(\s+([\w\d$#%\-]+))?</string>
 					<key>name</key>
 					<string>meta.event.declaration_definition.powerbuilder</string>
 				</dict>
@@ -371,7 +413,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b\w[\w\d$#%\-]*!</string>
+					<string>[\w\d$#%\-]+!</string>
 					<key>name</key>
 					<string>constant.language.enumerated.powerbuilder</string>
 				</dict>
@@ -395,13 +437,13 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>\b\w[\w\d$#%\-]*(?=\s*\()</string>
+					<string>[\w\d$#%\-]+(?=\s*\()</string>
 					<key>name</key>
 					<string>entity.name.function.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?&lt;=::|\.)\w[\w\d$#%\-]*\b</string>
+					<string>(?&lt;=::|\.)[\w\d$#%\-]+</string>
 					<key>name</key>
 					<string>variable.other.member.powerbuilder</string>
 				</dict>
@@ -425,7 +467,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>\b(\w[\w\d$#%\-]*)\s+(\w[\w\d$#%\-]*)(?=\s*\()</string>
+					<string>([\w\d$#%\-]+)\s+([\w\d$#%\-]+)(?=\s*\()</string>
 					<key>name</key>
 					<string>meta.function.declaration.powerbuilder</string>
 				</dict>
@@ -449,7 +491,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)\b(\w[\w\d$#%\-`]*)\s+(?!or|and|then)(\w[\w\d$#%\-]*)\b</string>
+					<string>(?i)([\w\d$#%\-`]+)\s+(?!or|and|then)([\w\d$#%\-]+)</string>
 					<key>name</key>
 					<string>meta.variable.declaration.powerbuilder</string>
 				</dict>
@@ -549,7 +591,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(\w[\w\d$#%\-`]*)\b</string>
+					<string>([\w\d$#%\-`]+)</string>
 					<key>name</key>
 					<string>storage.type.complex.powerbuilder</string>
 				</dict>
