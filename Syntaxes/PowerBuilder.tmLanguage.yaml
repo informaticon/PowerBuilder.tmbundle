@@ -88,7 +88,7 @@ repository:
 
       # - name: constant.numeric.time.powerbuilder
       - name: meta.event.declaration_definition.powerbuilder
-        match: (?i)(event)(\s+(type)\s+([\w\d$#%\-`]+))?\s+([\w\d$#%\-]+)\s*(\s([\w\d$#%\-]+)($|;)|(?=\())
+        match: (?i)(event)(\s+(type)\s+([\w\d$#%\-`]+))?\s+([\w\d$#%\-]+)\s*(\s([\w\d$#%\-]+)\s*($|;)|(?=\())
         captures:
           1:
             name: keyword.other.functions.powerbuilder

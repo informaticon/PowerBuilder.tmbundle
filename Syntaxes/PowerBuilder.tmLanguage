@@ -317,7 +317,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)(event)(\s+(type)\s+([\w\d$#%\-`]+))?\s+([\w\d$#%\-]+)\s*(\s([\w\d$#%\-]+)($|;)|(?=\())</string>
+					<string>(?i)(event)(\s+(type)\s+([\w\d$#%\-`]+))?\s+([\w\d$#%\-]+)\s*(\s([\w\d$#%\-]+)\s*($|;)|(?=\())</string>
 					<key>name</key>
 					<string>meta.event.declaration_definition.powerbuilder</string>
 				</dict>
