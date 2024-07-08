@@ -114,6 +114,13 @@
 								<dict>
 									<key>name</key>
 									<string>string.unquoted.header.description.powerbuilder</string>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#string-escapes</string>
+										</dict>
+									</array>
 								</dict>
 							</dict>
 							<key>match</key>
@@ -359,7 +366,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(global|shared|local)\b</string>
+					<string>(?i)\b(global|shared)\b</string>
 					<key>name</key>
 					<string>keyword.other.scope.powerbuilder</string>
 				</dict>
