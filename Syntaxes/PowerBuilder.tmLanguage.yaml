@@ -52,7 +52,7 @@ repository:
           1:
             name: keyword.other.types.powerbuilder
           2:
-            name: storage.type.complex.powerbuilder
+            name: entity.type.name.complex.powerbuilder
 
       - name: meta.variable.create_using.powerbuilder
         match: (?i)\b(create\s+using)(\s+[\w\d$#%\-]+)?
@@ -68,15 +68,15 @@ repository:
           1:
             name: keyword.other.types.powerbuilder
           2:
-            name: storage.type.complex.powerbuilder
+            name: entity.type.name.complex.powerbuilder
           3:
             name: keyword.other.types.powerbuilder
           4:
-            name: storage.type.complex.powerbuilder
+            name: entity.other.inherited-class.powerbuilder
           6:
             name: keyword.other.types.powerbuilder
           7:
-            name: storage.type.complex.powerbuilder
+            name: entity.other.inherited-class.powerbuilder
 
       - name: meta.function.throws_clause.powerbuilder
         match: (?i)\b(throws)\s+([\w\d$#%\-`]+)
@@ -84,11 +84,11 @@ repository:
           1:
             name: keyword.other.functions.powerbuilder
           2:
-            name: storage.type.complex.powerbuilder
+            name: entity.type.name.complex.powerbuilder
 
       # - name: constant.numeric.time.powerbuilder
       - name: meta.event.declaration_definition.powerbuilder
-        match: (?i)\b(event)(\s+(type)\s+([\w\d$#%\-`]+))?\s+([\w\d$#%\-]+)(\s+([\w\d$#%\-]+))?
+        match: (?i)(event)(\s+(type)\s+([\w\d$#%\-`]+))?\s+([\w\d$#%\-]+)\s*(\s([\w\d$#%\-]+)($|;)|(?=\())
         captures:
           1:
             name: keyword.other.functions.powerbuilder
@@ -120,12 +120,14 @@ repository:
             name: entity.name.function.powerbuilder
 
       - name: meta.variable.declaration.powerbuilder
-        match: (?i)([\w\d$#%\-`]+)\s+(?!or|and|then)([\w\d$#%\-]+)
+        match: (?i)([\w\d$#%\-`]+)\s*(\{(\d+)\}|\s)\s*(?!or|and|then)([\w\d$#%\-]+)
         captures:
           1:
             patterns:
               - include: '#types'
-          2:
+          3:
+            name: constant.numeric.number.powerbuilder
+          4:
             name: variable.other.local.powerbuilder
 
   literals:
@@ -144,12 +146,12 @@ repository:
   types:
     patterns:
       - include: '#primitives'
-      - name: storage.type.complex.powerbuilder
+      - name: entity.name.type.complex.powerbuilder
         match: ([\w\d$#%\-`]+)
 
   primitives:
     patterns:
-      - name: storage.type.primitives.powerbuilder
+      - name: entity.name.type.primitives.powerbuilder
         match: (?i)\b(any|blob|boolean|byte|char|character|date|datetime|dec|decimal|double|int|integer|long|longlong|longptr|real|string|time|uint|ulong|unsignedinteger|unsignedlong)\b
 
   final:
