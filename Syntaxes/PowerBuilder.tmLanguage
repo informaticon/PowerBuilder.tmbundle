@@ -280,12 +280,17 @@
 						</dict>
 						<key>2</key>
 						<dict>
-							<key>name</key>
-							<string>entity.type.name.complex.powerbuilder</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#types</string>
+								</dict>
+							</array>
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)\b(throws)\s+([\w\d$#%\-`]+)</string>
+					<string>(?i)\b(throws)\s+([\w\d$#%\-`]+(,\s*[\w\d$#%\-`]+)*)</string>
 					<key>name</key>
 					<string>meta.function.throws_clause.powerbuilder</string>
 				</dict>
@@ -521,7 +526,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)^\s*(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)\b</string>
+					<string>(?i)\b(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)\b</string>
 					<key>name</key>
 					<string>keyword.operator.sql.powerbuilder</string>
 				</dict>

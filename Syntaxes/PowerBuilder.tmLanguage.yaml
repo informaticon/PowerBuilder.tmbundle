@@ -79,12 +79,13 @@ repository:
             name: entity.other.inherited-class.powerbuilder
 
       - name: meta.function.throws_clause.powerbuilder
-        match: (?i)\b(throws)\s+([\w\d$#%\-`]+)
+        match: (?i)\b(throws)\s+([\w\d$#%\-`]+(,\s*[\w\d$#%\-`]+)*)
         captures:
           1:
             name: keyword.other.functions.powerbuilder
           2:
-            name: entity.type.name.complex.powerbuilder
+            patterns:
+              - include: '#types'
 
       - name: meta.event.declaration_definition.powerbuilder
         match: (?i)(event)(\s+(type)\s+([\w\d$#%\-`]+))?\s+([\w\d$#%\-]+)\s*(\s([\w\d$#%\-]+)\s*($|;)|(?=\())
@@ -200,7 +201,7 @@ repository:
         match: (?i)\b(or|and|xor|not)\b
 
       - name: keyword.operator.sql.powerbuilder
-        match: (?i)^\s*(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)\b
+        match: (?i)\b(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)\b
 
       - name: keyword.operator.sql.powerbuilder
         match: (?i)\b(set|current|of|is|using|null|from|into|values|where|first|prior|last|rollback|immediate|descriptor|cursor|procedure|for|of)\b
