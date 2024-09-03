@@ -18,6 +18,8 @@
 		<string>pbt</string>
 		<string>pbw</string>
 	</array>
+	<key>firstLineMatch</key>
+	<string>^((HA)?(?=\$)|forward)</string>
 	<key>name</key>
 	<string>PowerBuilder</string>
 	<key>patterns</key>
