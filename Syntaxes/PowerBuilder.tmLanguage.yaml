@@ -1,5 +1,4 @@
 ---
-# TODO case insensitiveness
 scopeName: source.powerbuilder
 uuid: EF182D00-2D16-4148-B916-27632C956F35
 fileTypes:
@@ -17,6 +16,7 @@ fileTypes:
 - pbt
 - pbw
 name: PowerBuilder
+firstLineMatch: ^((HA)?(?=\$)|forward)
 patterns:
   - include: '#strings'
   - include: '#general_rules'
