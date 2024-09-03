@@ -137,7 +137,7 @@ repository:
       - name: constant.numeric.time.powerbuilder
         match: \b\d{2}:\d{2}:\d{2}(.\d+)?\b
       - name: constant.numeric.number.powerbuilder
-        match: \b(\d+(\.\d+)?|(\.\d+))([eE][+\-]\d+)?\b
+        match: (\b|\+|-)(\d+(\.\d+)?|(\.\d+))([eE][+\-]?\d+)?\b
       - name: constant.language.boolean.powerbuilder
         match: (?i)\b(true|false)\b
       - name: constant.language.enumerated.powerbuilder
@@ -241,7 +241,7 @@ repository:
         end: \*/
 
       - name: meta.header.powerbuilder
-        begin: \A(HA)?
+        begin: \A(HA)?(?=\$)
         end: ^(?!\$)
         captures:
           1:

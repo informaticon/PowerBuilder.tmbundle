@@ -77,7 +77,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>\A(HA)?</string>
+					<string>\A(HA)?(?=\$)</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -413,7 +413,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(\d+(\.\d+)?|(\.\d+))([eE][+\-]\d+)?\b</string>
+					<string>(\b|\+|-)(\d+(\.\d+)?|(\.\d+))([eE][+\-]?\d+)?\b</string>
 					<key>name</key>
 					<string>constant.numeric.number.powerbuilder</string>
 				</dict>
