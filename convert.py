@@ -3,6 +3,7 @@
 
 import plistlib
 import yaml
+import json
 
 
 def recurseStringifyKeys(val):
@@ -29,3 +30,6 @@ recurseStringifyKeys(tm)
 
 with open('Syntaxes/PowerBuilder.tmLanguage', 'w') as plist:
     plist.write(plistlib.dumps(tm).decode())
+
+with open('Syntaxes/PowerBuilder.tmLanguage.json', 'w') as js:
+    js.write(json.dumps(tm))
