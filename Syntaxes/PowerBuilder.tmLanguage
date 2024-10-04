@@ -30,19 +30,15 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#general_rules</string>
-		</dict>
-		<dict>
-			<key>include</key>
 			<string>#comments</string>
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#keywords</string>
+			<string>#general_rules</string>
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#sql_keywords</string>
+			<string>#keywords</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -140,15 +136,13 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>([\w\d$#%][\w\d$#%\-]*)</string>
+					<string>([\w$#%][\w\d$#%\-]*)</string>
 					<key>name</key>
 					<string>variable.other.local.powerbuilder</string>
 				</dict>
 				<dict>
-					<key>match</key>
-					<string>(\+|\-|\*|\/|\^|=|&gt;|&lt;|&amp;)</string>
-					<key>name</key>
-					<string>keyword.operator.symbols.powerbuilder</string>
+					<key>include</key>
+					<string>#operators</string>
 				</dict>
 			</array>
 		</dict>
@@ -166,13 +160,22 @@
 							<key>name</key>
 							<string>keyword.operator.sql.powerbuilder</string>
 						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.sql.powerbuilder</string>
+						</dict>
 					</dict>
 					<key>end</key>
-					<string>;</string>
+					<string>(;)</string>
 					<key>name</key>
 					<string>meta.sql.statement.powerbuilder</string>
 					<key>patterns</key>
 					<array>
+						<dict>
+							<key>include</key>
+							<string>#strings</string>
+						</dict>
 						<dict>
 							<key>include</key>
 							<string>#sql_keywords</string>
@@ -182,14 +185,18 @@
 							<string>#literals</string>
 						</dict>
 						<dict>
+							<key>include</key>
+							<string>#operators</string>
+						</dict>
+						<dict>
 							<key>match</key>
-							<string>(?&lt;=::|\.)[\w\d$#%][\w\d$#%\-]*</string>
+							<string>(?&lt;=::|\.)[\w$#%][\w\d$#%\-]*</string>
 							<key>name</key>
 							<string>variable.other.local.powerbuilder</string>
 						</dict>
 						<dict>
 							<key>match</key>
-							<string>:?([\w\d$#%][\w\d$#%\-]*)</string>
+							<string>:?([\w$#%][\w\d$#%\-]*)</string>
 							<key>name</key>
 							<string>variable.other.local.powerbuilder</string>
 						</dict>
@@ -215,7 +222,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(create)\s+(?!using(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`])))([\w\d$#%][\w\d$#%\-`]*)</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(create)\s+(?!using(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`])))([\w$#%][\w\d$#%\-`]*)</string>
 					<key>name</key>
 					<string>meta.variable.create.powerbuilder</string>
 				</dict>
@@ -254,7 +261,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(type)\s+([\w\d$#%][\w\d$#%\-]*)\s+(from)\s+([\w\d$#%][\w\d$#%\-`]*)(\s+(within)\s+([\w\d$#%][\w\d$#%\-`]*))?</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(type)\s+([\w$#%][\w\d$#%\-]*)\s+(from)\s+([\w$#%][\w\d$#%\-`]*)(\s+(within)\s+([\w$#%][\w\d$#%\-`]*))?</string>
 					<key>name</key>
 					<string>meta.type.declaration.powerbuilder</string>
 				</dict>
@@ -278,7 +285,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(throws)\s+([\w\d$#%][\w\d$#%\-`]*(,\s*[\w\d$#%][\w\d$#%\-`]*)*)</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(throws)\s+([\w$#%][\w\d$#%\-`]*(,\s*[\w$#%][\w\d$#%\-`]*)*)</string>
 					<key>name</key>
 					<string>meta.function.throws_clause.powerbuilder</string>
 				</dict>
@@ -317,7 +324,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)(event)(\s+(type)\s+([\w\d$#%][\w\d$#%\-`]*))?\s+([\w\d$#%][\w\d$#%\-]*)\s*(\s([\w\d$#%][\w\d$#%\-]*)\s*($|;)|(?=\())</string>
+					<string>(?i)(event)(\s+(type)\s+([\w$#%][\w\d$#%\-`]*))?\s+([\w$#%][\w\d$#%\-]*)\s*(\s([\w$#%][\w\d$#%\-]*)\s*($|;)|(?=\())</string>
 					<key>name</key>
 					<string>meta.event.declaration_definition.powerbuilder</string>
 				</dict>
@@ -381,6 +388,10 @@
 					<key>name</key>
 					<string>keyword.other.reserved.powerbuilder</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#sql_keywords</string>
+				</dict>
 			</array>
 		</dict>
 		<key>literals</key>
@@ -413,9 +424,21 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>([\w\d$#%][\w\d$#%\-]*!)</string>
+					<string>([\w$#%][\w\d$#%\-]*!)</string>
 					<key>name</key>
 					<string>constant.language.enumerated.powerbuilder</string>
+				</dict>
+			</array>
+		</dict>
+		<key>operators</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>(\+|\-|\*|\/|\^|=|&gt;|&lt;|&amp;)</string>
+					<key>name</key>
+					<string>keyword.operator.symbols.powerbuilder</string>
 				</dict>
 			</array>
 		</dict>
@@ -437,13 +460,13 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>[\w\d$#%][\w\d$#%\-]*(?=\s*\()</string>
+					<string>[\w$#%][\w\d$#%\-]*(?=\s*\()</string>
 					<key>name</key>
 					<string>entity.name.function.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?&lt;=::|\.)[\w\d$#%][\w\d$#%\-]*</string>
+					<string>(?&lt;=::|\.)[\w$#%][\w\d$#%\-]*</string>
 					<key>name</key>
 					<string>variable.other.member.powerbuilder</string>
 				</dict>
@@ -467,7 +490,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>([\w\d$#%][\w\d$#%\-]*)\s+([\w\d$#%][\w\d$#%\-]*)(?=\s*\()</string>
+					<string>([\w$#%][\w\d$#%\-]*)\s+([\w$#%][\w\d$#%\-]*)(?=\s*\()</string>
 					<key>name</key>
 					<string>meta.function.declaration.powerbuilder</string>
 				</dict>
@@ -496,7 +519,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)([\w\d$#%][\w\d$#%\-`]*)\s*(\{(\d+)\}|\s)\s*(?!(or|and|then)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`])))([\w\d$#%][\w\d$#%\-]*)</string>
+					<string>(?i)([\w$#%][\w\d$#%\-`]*)\s*(\{(\d+)\}|\s)\s*(?!(or|and|then)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`])))([\w$#%][\w\d$#%\-]*)</string>
 					<key>name</key>
 					<string>meta.variable.declaration.powerbuilder</string>
 				</dict>
@@ -520,7 +543,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(set|current|of|is|null|from|into|values|where|first|prior|last|rollback|immediate|descriptor|cursor|procedure|for|of)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(set|current|of|is|null|from|into|using|values|where|first|prior|last|rollback|immediate|descriptor|cursor|procedure|for|of)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>keyword.operator.sql.powerbuilder</string>
 				</dict>
@@ -596,7 +619,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>([\w\d$#%][\w\d$#%\-`]*)</string>
+					<string>([\w$#%][\w\d$#%\-`]*)</string>
 					<key>name</key>
 					<string>entity.name.type.complex.powerbuilder</string>
 				</dict>

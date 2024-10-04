@@ -39,4 +39,4 @@ with open('Syntaxes/PowerBuilder.tmLanguage', 'w') as plist_file:
     plist_file.write(plistlib.dumps(tm).decode())
 
 with open('Syntaxes/PowerBuilder.tmLanguage.json', 'w') as json_file:
-    json_file.write(json.dumps(tm))
+    json_file.write(json.dumps(tm, indent=2))
