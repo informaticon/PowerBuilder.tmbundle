@@ -140,7 +140,7 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>[\w\d$#%\-]+</string>
+					<string>([\w\d$#%][\w\d$#%\-]*)</string>
 					<key>name</key>
 					<string>variable.other.local.powerbuilder</string>
 				</dict>
@@ -158,7 +158,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?i)^\s*(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)\b(?!\s*\()</string>
+					<string>(?i)^\s*(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(?!\s*\()</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -183,13 +183,13 @@
 						</dict>
 						<dict>
 							<key>match</key>
-							<string>(?&lt;=::|\.)[\w\d$#%\-]+</string>
+							<string>(?&lt;=::|\.)[\w\d$#%][\w\d$#%\-]*</string>
 							<key>name</key>
 							<string>variable.other.local.powerbuilder</string>
 						</dict>
 						<dict>
 							<key>match</key>
-							<string>:?([\w\d$#%\-]+)</string>
+							<string>:?([\w\d$#%][\w\d$#%\-]*)</string>
 							<key>name</key>
 							<string>variable.other.local.powerbuilder</string>
 						</dict>
@@ -205,33 +205,19 @@
 						</dict>
 						<key>2</key>
 						<dict>
-							<key>name</key>
-							<string>entity.type.name.complex.powerbuilder</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#types</string>
+								</dict>
+							</array>
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)\b(create)\s+([\w\d$#%\-`]+)</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(create)\s+(?!using(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`])))([\w\d$#%][\w\d$#%\-`]*)</string>
 					<key>name</key>
 					<string>meta.variable.create.powerbuilder</string>
-				</dict>
-				<dict>
-					<key>captures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>keyword.other.types.powerbuilder</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>variable.other.local.powerbuilder</string>
-						</dict>
-					</dict>
-					<key>match</key>
-					<string>(?i)\b(create\s+using)(\s+[\w\d$#%\-]+)?</string>
-					<key>name</key>
-					<string>meta.variable.create_using.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>captures</key>
@@ -268,7 +254,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)\b(type)\s+([\w\d$#%\-]+)\s+(from)\s+([\w\d$#%\-`]+)(\s+(within)\s+([\w\d$#%\-`]+))?</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(type)\s+([\w\d$#%][\w\d$#%\-]*)\s+(from)\s+([\w\d$#%][\w\d$#%\-`]*)(\s+(within)\s+([\w\d$#%][\w\d$#%\-`]*))?</string>
 					<key>name</key>
 					<string>meta.type.declaration.powerbuilder</string>
 				</dict>
@@ -292,7 +278,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)\b(throws)\s+([\w\d$#%\-`]+(,\s*[\w\d$#%\-`]+)*)</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(throws)\s+([\w\d$#%][\w\d$#%\-`]*(,\s*[\w\d$#%][\w\d$#%\-`]*)*)</string>
 					<key>name</key>
 					<string>meta.function.throws_clause.powerbuilder</string>
 				</dict>
@@ -331,7 +317,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)(event)(\s+(type)\s+([\w\d$#%\-`]+))?\s+([\w\d$#%\-]+)\s*(\s([\w\d$#%\-]+)\s*($|;)|(?=\())</string>
+					<string>(?i)(event)(\s+(type)\s+([\w\d$#%][\w\d$#%\-`]*))?\s+([\w\d$#%][\w\d$#%\-]*)\s*(\s([\w\d$#%][\w\d$#%\-]*)\s*($|;)|(?=\())</string>
 					<key>name</key>
 					<string>meta.event.declaration_definition.powerbuilder</string>
 				</dict>
@@ -343,55 +329,55 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(or|and|not)\b</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(or|and|not)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>keyword.operator.boolean.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(constant|readonly|ref)\b</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(constant|readonly|ref)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>keyword.other.variable.modifier.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(public|private|protected|privatewrite|privateread|protectedread|protectedwrite|systemread|systemwrite)\b</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(public|private|protected|privatewrite|privateread|protectedread|protectedwrite|systemread|systemwrite)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>keyword.other.access.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(super|this|sqlca|parent)\b</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(super|this|sqlca|parent)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>variable.language.powerbuiler</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(indirect|variables|end\s+variables|forward|end\s+forward|destroy|create|type|end\s+type|prototypes|within|autoinstantiate|system)\b</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(indirect|variables|end\s+variables|forward|end\s+forward|destroy|create|using|type|end\s+type|prototypes|within|autoinstantiate|system)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>keyword.other.types.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(global|shared)\b</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(global|shared)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>keyword.other.scope.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(return|function|end\s+function|subroutine|end\s+subroutine|throw|throws|event|end\s+event|on|end\s+on|call|dynamic|post|trigger|open|static|alias\s+for|alias|library|rpcfunc)\b</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(return|function|end\s+function|subroutine|end\s+subroutine|throw|throws|event|end\s+event|on|end\s+on|call|dynamic|post|trigger|open|static|alias\s+for|alias|library|rpcfunc)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>keyword.other.functions.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(if|then|else|elseif|case|choose|exit|continue|for|to|step|next|do|while|loop|until|try|catch|finally|release|end|goto|halt)\b</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(if|then|else|elseif|case|choose|exit|continue|for|to|step|next|do|while|loop|until|try|catch|finally|release|end|goto|halt)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>keyword.control.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(namespace|intrinsic|with|_debug|enumerated|external|native)\b</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(namespace|intrinsic|with|_debug|enumerated|external|native)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>keyword.other.reserved.powerbuilder</string>
 				</dict>
@@ -403,31 +389,31 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>\b\d{4}-\d{2}-\d{2}\b</string>
+					<string>(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))\d{4}-\d{2}-\d{2}(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>constant.numeric.date.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b\d{2}:\d{2}:\d{2}(.\d+)?\b</string>
+					<string>(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))\d{2}:\d{2}:\d{2}(.\d+)?(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>constant.numeric.time.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(\b|\+|-)(\d+(\.\d+)?|(\.\d+))([eE][+\-]?\d+)?\b</string>
+					<string>((?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))|\+|-)(\d+(\.\d+)?|(\.\d+))([eE][+\-]?\d+)?(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>constant.numeric.number.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(true|false)\b</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(true|false)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>constant.language.boolean.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>[\w\d$#%\-]+!</string>
+					<string>([\w\d$#%][\w\d$#%\-]*!)</string>
 					<key>name</key>
 					<string>constant.language.enumerated.powerbuilder</string>
 				</dict>
@@ -439,7 +425,7 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(any|blob|boolean|byte|char|character|date|datetime|dec|decimal|double|int|integer|long|longlong|longptr|real|string|time|uint|ulong|unsignedinteger|unsignedlong)\b</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(any|blob|boolean|byte|char|character|date|datetime|dec|decimal|double|int|integer|long|longlong|longptr|real|string|time|uint|ulong|unsignedinteger|unsignedlong)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>entity.name.type.primitives.powerbuilder</string>
 				</dict>
@@ -451,13 +437,13 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>[\w\d$#%\-]+(?=\s*\()</string>
+					<string>[\w\d$#%][\w\d$#%\-]*(?=\s*\()</string>
 					<key>name</key>
 					<string>entity.name.function.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?&lt;=::|\.)[\w\d$#%\-]+</string>
+					<string>(?&lt;=::|\.)[\w\d$#%][\w\d$#%\-]*</string>
 					<key>name</key>
 					<string>variable.other.member.powerbuilder</string>
 				</dict>
@@ -481,7 +467,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>([\w\d$#%\-]+)\s+([\w\d$#%\-]+)(?=\s*\()</string>
+					<string>([\w\d$#%][\w\d$#%\-]*)\s+([\w\d$#%][\w\d$#%\-]*)(?=\s*\()</string>
 					<key>name</key>
 					<string>meta.function.declaration.powerbuilder</string>
 				</dict>
@@ -503,14 +489,14 @@
 							<key>name</key>
 							<string>constant.numeric.number.powerbuilder</string>
 						</dict>
-						<key>4</key>
+						<key>5</key>
 						<dict>
 							<key>name</key>
 							<string>variable.other.local.powerbuilder</string>
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i)([\w\d$#%\-`]+)\s*(\{(\d+)\}|\s)\s*(?!or|and|then)([\w\d$#%\-]+)</string>
+					<string>(?i)([\w\d$#%][\w\d$#%\-`]*)\s*(\{(\d+)\}|\s)\s*(?!(or|and|then)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`])))([\w\d$#%][\w\d$#%\-]*)</string>
 					<key>name</key>
 					<string>meta.variable.declaration.powerbuilder</string>
 				</dict>
@@ -522,19 +508,19 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(or|and|xor|not)\b</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(or|and|xor|not)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>keyword.operator.sql.boolean.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)\b</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>keyword.operator.sql.powerbuilder</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)\b(set|current|of|is|using|null|from|into|values|where|first|prior|last|rollback|immediate|descriptor|cursor|procedure|for|of)\b</string>
+					<string>(?i)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))(set|current|of|is|null|from|into|values|where|first|prior|last|rollback|immediate|descriptor|cursor|procedure|for|of)(?:^(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])$|(?&lt;![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?&lt;=[\w\d$#%\-`])(?![\w\d$#%\-`]))</string>
 					<key>name</key>
 					<string>keyword.operator.sql.powerbuilder</string>
 				</dict>
@@ -610,7 +596,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>([\w\d$#%\-`]+)</string>
+					<string>([\w\d$#%][\w\d$#%\-`]*)</string>
 					<key>name</key>
 					<string>entity.name.type.complex.powerbuilder</string>
 				</dict>

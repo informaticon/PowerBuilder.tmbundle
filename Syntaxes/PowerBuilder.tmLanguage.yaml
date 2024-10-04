@@ -30,7 +30,7 @@ repository:
   general_rules:
     patterns:
       - name: meta.sql.statement.powerbuilder
-        begin: (?i)^\s*(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)\b(?!\s*\()
+        begin: (?i)^\s*(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(?!\s*\()
         end: ;
         captures:
           1:
@@ -40,30 +40,23 @@ repository:
           - include: '#literals'
 
           - name: variable.other.local.powerbuilder
-            match: (?<=::|\.)[\w\d$#%\-]+
+            match: (?<=::|\.)[\w\d$#%][\w\d$#%\-]*
 
           - name: variable.other.local.powerbuilder
-            match: :?([\w\d$#%\-]+)
-
+            match: :?([\w\d$#%][\w\d$#%\-]*)
 
       - name: meta.variable.create.powerbuilder
-        match: (?i)\b(create)\s+([\w\d$#%\-`]+)
+        match: (?i)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(create)\s+(?!using(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`])))([\w\d$#%][\w\d$#%\-`]*)
         captures:
           1:
             name: keyword.other.types.powerbuilder
           2:
-            name: entity.type.name.complex.powerbuilder
+            patterns:
+              - include: '#types'
 
-      - name: meta.variable.create_using.powerbuilder
-        match: (?i)\b(create\s+using)(\s+[\w\d$#%\-]+)?
-        captures:
-          1:
-            name: keyword.other.types.powerbuilder
-          2:
-            name: variable.other.local.powerbuilder
 
       - name: meta.type.declaration.powerbuilder
-        match: (?i)\b(type)\s+([\w\d$#%\-]+)\s+(from)\s+([\w\d$#%\-`]+)(\s+(within)\s+([\w\d$#%\-`]+))?
+        match: (?i)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(type)\s+([\w\d$#%][\w\d$#%\-]*)\s+(from)\s+([\w\d$#%][\w\d$#%\-`]*)(\s+(within)\s+([\w\d$#%][\w\d$#%\-`]*))?
         captures:
           1:
             name: keyword.other.types.powerbuilder
@@ -79,7 +72,7 @@ repository:
             name: entity.other.inherited-class.powerbuilder
 
       - name: meta.function.throws_clause.powerbuilder
-        match: (?i)\b(throws)\s+([\w\d$#%\-`]+(,\s*[\w\d$#%\-`]+)*)
+        match: (?i)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(throws)\s+([\w\d$#%][\w\d$#%\-`]*(,\s*[\w\d$#%][\w\d$#%\-`]*)*)
         captures:
           1:
             name: keyword.other.functions.powerbuilder
@@ -88,7 +81,7 @@ repository:
               - include: '#types'
 
       - name: meta.event.declaration_definition.powerbuilder
-        match: (?i)(event)(\s+(type)\s+([\w\d$#%\-`]+))?\s+([\w\d$#%\-]+)\s*(\s([\w\d$#%\-]+)\s*($|;)|(?=\())
+        match: (?i)(event)(\s+(type)\s+([\w\d$#%][\w\d$#%\-`]*))?\s+([\w\d$#%][\w\d$#%\-]*)\s*(\s([\w\d$#%][\w\d$#%\-]*)\s*($|;)|(?=\())
         captures:
           1:
             name: keyword.other.functions.powerbuilder
@@ -105,13 +98,13 @@ repository:
   special_rules:
     patterns:
       - name: entity.name.function.powerbuilder
-        match: '[\w\d$#%\-]+(?=\s*\()'
+        match: '[\w\d$#%][\w\d$#%\-]*(?=\s*\()'
 
       - name: variable.other.member.powerbuilder
-        match: (?<=::|\.)[\w\d$#%\-]+
+        match: (?<=::|\.)[\w\d$#%][\w\d$#%\-]*
 
       - name: meta.function.declaration.powerbuilder
-        match: ([\w\d$#%\-]+)\s+([\w\d$#%\-]+)(?=\s*\()
+        match: ([\w\d$#%][\w\d$#%\-]*)\s+([\w\d$#%][\w\d$#%\-]*)(?=\s*\()
         captures:
           1:
             patterns:
@@ -120,39 +113,39 @@ repository:
             name: entity.name.function.powerbuilder
 
       - name: meta.variable.declaration.powerbuilder
-        match: (?i)([\w\d$#%\-`]+)\s*(\{(\d+)\}|\s)\s*(?!or|and|then)([\w\d$#%\-]+)
+        match: (?i)([\w\d$#%][\w\d$#%\-`]*)\s*(\{(\d+)\}|\s)\s*(?!(or|and|then)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`])))([\w\d$#%][\w\d$#%\-]*)
         captures:
           1:
             patterns:
               - include: '#types'
           3:
             name: constant.numeric.number.powerbuilder
-          4:
+          5:
             name: variable.other.local.powerbuilder
 
   literals:
     patterns:
       - name: constant.numeric.date.powerbuilder
-        match: \b\d{4}-\d{2}-\d{2}\b
+        match: (?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))\d{4}-\d{2}-\d{2}(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))
       - name: constant.numeric.time.powerbuilder
-        match: \b\d{2}:\d{2}:\d{2}(.\d+)?\b
+        match: (?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))\d{2}:\d{2}:\d{2}(.\d+)?(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))
       - name: constant.numeric.number.powerbuilder
-        match: (\b|\+|-)(\d+(\.\d+)?|(\.\d+))([eE][+\-]?\d+)?\b
+        match: ((?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))|\+|-)(\d+(\.\d+)?|(\.\d+))([eE][+\-]?\d+)?(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))
       - name: constant.language.boolean.powerbuilder
-        match: (?i)\b(true|false)\b
+        match: (?i)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(true|false)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))
       - name: constant.language.enumerated.powerbuilder
-        match: '[\w\d$#%\-]+!'
+        match: ([\w\d$#%][\w\d$#%\-]*!)
       
   types:
     patterns:
       - include: '#primitives'
       - name: entity.name.type.complex.powerbuilder
-        match: ([\w\d$#%\-`]+)
+        match: ([\w\d$#%][\w\d$#%\-`]*)
 
   primitives:
     patterns:
       - name: entity.name.type.primitives.powerbuilder
-        match: (?i)\b(any|blob|boolean|byte|char|character|date|datetime|dec|decimal|double|int|integer|long|longlong|longptr|real|string|time|uint|ulong|unsignedinteger|unsignedlong)\b
+        match: (?i)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(any|blob|boolean|byte|char|character|date|datetime|dec|decimal|double|int|integer|long|longlong|longptr|real|string|time|uint|ulong|unsignedinteger|unsignedlong)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))
 
   final:
     patterns:
@@ -161,7 +154,7 @@ repository:
 
       # Assuming all remaining Words are Variables
       - name: variable.other.local.powerbuilder
-        match: '[\w\d$#%\-]+'
+        match: ([\w\d$#%][\w\d$#%\-]*)
 
       - name: keyword.operator.symbols.powerbuilder
         match: (\+|\-|\*|\/|\^|=|>|<|&)
@@ -169,42 +162,42 @@ repository:
   keywords:
     patterns:
       - name: keyword.operator.boolean.powerbuilder
-        match: (?i)\b(or|and|not)\b
+        match: (?i)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(or|and|not)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))
 
       - name: keyword.other.variable.modifier.powerbuilder
-        match: (?i)\b(constant|readonly|ref)\b
+        match: (?i)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(constant|readonly|ref)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))
 
       - name: keyword.other.access.powerbuilder
-        match: (?i)\b(public|private|protected|privatewrite|privateread|protectedread|protectedwrite|systemread|systemwrite)\b
+        match: (?i)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(public|private|protected|privatewrite|privateread|protectedread|protectedwrite|systemread|systemwrite)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))
 
       - name: variable.language.powerbuiler
-        match: (?i)\b(super|this|sqlca|parent)\b
+        match: (?i)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(super|this|sqlca|parent)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))
 
       - name: keyword.other.types.powerbuilder
-        match: (?i)\b(indirect|variables|end\s+variables|forward|end\s+forward|destroy|create|type|end\s+type|prototypes|within|autoinstantiate|system)\b
+        match: (?i)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(indirect|variables|end\s+variables|forward|end\s+forward|destroy|create|using|type|end\s+type|prototypes|within|autoinstantiate|system)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))
 
       - name: keyword.other.scope.powerbuilder
-        match: (?i)\b(global|shared)\b
+        match: (?i)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(global|shared)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))
 
       - name: keyword.other.functions.powerbuilder
-        match: (?i)\b(return|function|end\s+function|subroutine|end\s+subroutine|throw|throws|event|end\s+event|on|end\s+on|call|dynamic|post|trigger|open|static|alias\s+for|alias|library|rpcfunc)\b
+        match: (?i)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(return|function|end\s+function|subroutine|end\s+subroutine|throw|throws|event|end\s+event|on|end\s+on|call|dynamic|post|trigger|open|static|alias\s+for|alias|library|rpcfunc)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))
 
       - name: keyword.control.powerbuilder
-        match: (?i)\b(if|then|else|elseif|case|choose|exit|continue|for|to|step|next|do|while|loop|until|try|catch|finally|release|end|goto|halt)\b
+        match: (?i)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(if|then|else|elseif|case|choose|exit|continue|for|to|step|next|do|while|loop|until|try|catch|finally|release|end|goto|halt)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))
 
       - name: keyword.other.reserved.powerbuilder
-        match: (?i)\b(namespace|intrinsic|with|_debug|enumerated|external|native)\b
+        match: (?i)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(namespace|intrinsic|with|_debug|enumerated|external|native)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))
 
   sql_keywords:
     patterns:
       - name: keyword.operator.sql.boolean.powerbuilder
-        match: (?i)\b(or|and|xor|not)\b
+        match: (?i)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(or|and|xor|not)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))
 
       - name: keyword.operator.sql.powerbuilder
-        match: (?i)\b(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)\b
+        match: (?i)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(close|commit|connect|declare|delete|describe|disconnect|execute|fetch|insert|open|prepare|rollback|select|selectblob|update|updateblob)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))
 
       - name: keyword.operator.sql.powerbuilder
-        match: (?i)\b(set|current|of|is|using|null|from|into|values|where|first|prior|last|rollback|immediate|descriptor|cursor|procedure|for|of)\b
+        match: (?i)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))(set|current|of|is|null|from|into|values|where|first|prior|last|rollback|immediate|descriptor|cursor|procedure|for|of)(?:^(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])$|(?<![\w\d$#%\-`])(?=[\w\d$#%\-`])|(?<=[\w\d$#%\-`])(?![\w\d$#%\-`]))
 
   strings:
     patterns:
@@ -260,5 +253,3 @@ repository:
                 name: string.unquoted.header.description.powerbuilder
                 patterns:
                   - include: '#string-escapes'
-
-  
